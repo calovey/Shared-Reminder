@@ -50,7 +50,7 @@ This project is a Progressive Web App (PWA) that allows two or more users to col
 * **Backend / Realtime DB:** Firebase Firestore
 * **Authentication:** Firebase Auth (Anonymous / Code-based workspace access)
 * **Notifications:** Firebase Cloud Messaging (FCM)
-* **Styling:** Custom SCSS (mobile-first, Apple-style UI)
+* **Styling:** Tailwind CSS (utility-first, mobile-first, Apple-inspired UI)
 
 ---
 
