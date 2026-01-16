@@ -1,0 +1,18 @@
+<div class="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
+  <app-header (menuClick)="toggleSidebar()"></app-header>
+
+  <div class="flex relative">
+    <!-- Sidebar Overlay -->
+    <div *ngIf="sidebarOpen" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 lg:hidden"
+      (click)="toggleSidebar()">
+    </div>
+
+    <app-sidebar [isOpen]="sidebarOpen" (closeMenu)="closeSidebar()">
+    </app-sidebar>
+
+    <main class="flex-1 p-4 lg:p-8 max-w-4xl mx-auto w-full">
+      <router-outlet></router-outlet>
+      <app-reminder-list></app-reminder-list>
+    </main>
+  </div>
+</div>

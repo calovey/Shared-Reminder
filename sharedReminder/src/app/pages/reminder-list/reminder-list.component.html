@@ -1,0 +1,59 @@
+<div class="space-y-6">
+  <!-- Add New Reminder Card -->
+  <div class="relative bg-gradient-to-br from-purple-400 via-pink-400 to-orange-400 rounded-3xl p-1 shadow-2xl">
+    <div class="bg-white rounded-[22px] p-6">
+      <div class="space-y-4">
+        <div class="flex items-center gap-2 text-purple-600 mb-4">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span class="font-semibold">New Reminder</span>
+        </div>
+
+        <div class="relative">
+          <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-red-300 to-red-400 rounded-full"></div>
+
+          <textarea [(ngModel)]="newReminder" (keydown)="onKeyDown($event)" placeholder="Type your reminder here..."
+            class="w-full pl-6 pr-4 py-2 bg-transparent resize-none focus:outline-none text-gray-800 placeholder-gray-400"
+            style="background-image: repeating-linear-gradient(transparent, transparent 31px, #e5e7eb 31px, #e5e7eb 32px); line-height: 32px; min-height: 96px;"
+            rows="3">
+          </textarea>
+        </div>
+
+        <button (click)="addReminder()"
+          class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          Add Reminder
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reminders List -->
+  <div class="space-y-4">
+    <div *ngFor="let reminder of reminders"
+      class="relative bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 rounded-2xl p-1 shadow-lg hover:shadow-xl transition-all duration-300">
+      <div class="bg-white rounded-[14px] p-5">
+        <div class="flex items-start gap-4">
+          <button (click)="toggleComplete(reminder.id)"
+            [class]="'flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ' + (reminder.completed ? 'bg-gradient-to-br from-purple-500 to-pink-500 border-transparent' : 'border-gray-300 hover:border-purple-500')">
+            <svg *ngIf="reminder.completed" class="w-4 h-4 text-white" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </button>
+
+          <div class="flex-1 min-w-0">
+            <p
+              [class]="'text-gray-800 transition-all duration-200 ' + (reminder.completed ? 'line-through opacity-50' : '')">
+              {{ reminder.text }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
