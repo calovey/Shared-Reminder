@@ -1,7 +1,7 @@
 # Shared Reminder PWA
 
 > **A cross-platform (Web, iOS, Android) shared reminder & list application**
-> Built with **Angular**, **PWA**, and **Firebase**.
+> Built with **Angular**, **PWA**,  **Tailwind** and **Firebase**.
 
 This project is a Progressive Web App (PWA) that allows two or more users to collaborate in a **shared workspace**, creating **lists and reminders** with **real-time synchronization** and **offline-first** support.
 
