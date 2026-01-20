@@ -1,0 +1,29 @@
+<div class="fixed inset-0 bg-black/40 flex items-center justify-center">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
+        <div *ngIf="!isLoading">
+            <p class="text-sm text-black-600 mb-6">
+                Share this private code to invite someone into your workspace.
+                Only people with this code can access your shared reminders.
+            </p>
+            <p class="text-lg font-mono tracking-widest cursor-pointer hover:bg-gray-100 px-2 py-1 rounded flex items-center justify-center"
+                (click)="copyCode()">
+                {{ workspaceCode }}
+            </p>
+            <div class="flex justify-center gap-2 mt-6">
+                <button class="px-4 py-2 rounded-lg bg-gray-200 action-btn" (click)="close()">
+                    Close
+                </button>
+                <button class="px-4 py-2 rounded-lg text-white bg-[#80a1e9] action-btn"
+                    [class.pointer-events-none]="copied" [class.opacity-60]="copied" (click)="copyCode()">
+                    {{ copied ? 'Copied ✓' : 'Copy' }}
+                </button>
+            </div>
+        </div>
+        <div *ngIf="isLoading" class="flex items-center justify-center">
+            <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30">
+                </circle>
+            </svg>
+        </div>
+    </div>
+</div>
