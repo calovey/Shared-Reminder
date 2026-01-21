@@ -83,3 +83,67 @@ $duration: 1.4s;
         box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
     }
 }
+
+.social-medias {
+    .share-icons {
+        display: flex;
+        gap: 12px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #374151; // gray-700
+        background: #f3f4f6; // gray-100
+        font-size: 18px;
+        text-decoration: none;
+
+        transition:
+            background-color 0.25s ease,
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            color 0.2s ease;
+
+        &:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+            color: #fff;
+        }
+
+        &:active {
+            transform: scale(0.96);
+        }
+    }
+
+    /* Platform colors */
+    .facebook:hover {
+        background: #1877f2;
+    }
+
+    .twitter:hover {
+        background: #000000;
+    }
+
+    .instagram:hover {
+        background: linear-gradient(45deg,
+                #f58529,
+                #dd2a7b,
+                #8134af,
+                #515bd4);
+    }
+
+    .whatsapp:hover {
+        background: #25d366;
+    }
+
+    .telegram:hover {
+        background: #229ed9;
+    }
+}
