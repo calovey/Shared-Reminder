@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.html,
+body {
+    font-family: "Funnel Display", sans-serif;
+    font-optical-sizing: auto;
+}
