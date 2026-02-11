@@ -6,8 +6,8 @@ import { Router } from '@angular/router';
   standalone: true,
   selector: 'app-sidebar',
   imports: [CommonModule],
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss',
+  templateUrl: './sidebar.html',
+  styleUrl: './sidebar.scss',
 })
 export class SidebarComponent {
   @Input() isOpen = false;

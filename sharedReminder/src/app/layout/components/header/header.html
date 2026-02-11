@@ -1,0 +1,51 @@
+<header
+  class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 shadow-sm transition-colors duration-300">
+  <div class="flex items-center justify-between px-4 py-3">
+    <button (click)="onMenuClick()" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+      <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+
+    <h1
+      class="text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+      Shared Workspace
+    </h1>
+
+    <div class="flex items-center gap-2">
+      <button (click)="toggleTheme()" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+        @if((theme$ | async) === 'dark') {
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+          class="w-5 h-5 text-yellow-300 drop-shadow-[0_0_8px_rgba(253,224,71,0.45)]" fill="currentColor">
+          <!-- Sun center -->
+          <circle cx="256" cy="256" r="128" />
+          <!-- Rays -->
+          <rect x="236" y="0" width="40" height="80" rx="10" />
+          <rect x="236" y="432" width="40" height="80" rx="10" />
+          <rect x="0" y="236" width="80" height="40" rx="10" />
+          <rect x="432" y="236" width="80" height="40" rx="10" />
+          <!-- Diagonal rays -->
+          <rect x="74" y="74" width="80" height="40" rx="10" transform="rotate(45 114 94)" />
+          <rect x="358" y="398" width="80" height="40" rx="10" transform="rotate(45 398 418)" />
+          <rect x="74" y="398" width="80" height="40" rx="10" transform="rotate(-45 114 418)" />
+          <rect x="358" y="74" width="80" height="40" rx="10" transform="rotate(-45 398 94)" />
+        </svg>
+        } @else {
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5 text-indigo-950 dark:text-sky-300 drop-shadow-[0_0_10px_rgba(56,189,248,0.25)]"
+          fill="currentColor">
+          <path
+            d="M12 22C17.5228 22 22 17.5228 22 12C22 11.5373 21.3065 11.4608 21.0672 11.8568C19.9289 13.7406 17.8615 15 15.5 15C11.9101 15 9 12.0899 9 8.5C9 6.13845 10.2594 4.07105 12.1432 2.93276C12.5392 2.69347 12.4627 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
+        </svg>
+        }
+      </button>
+
+      <button (click)="onShare()" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
+        <svg class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>

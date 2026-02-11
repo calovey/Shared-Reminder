@@ -14,8 +14,8 @@ interface Reminder {
   standalone: true,
   selector: 'app-reminder-list',
   imports: [CommonModule, FormsModule],
-  templateUrl: './reminder-list.component.html',
-  styleUrl: './reminder-list.component.scss',
+  templateUrl: './reminder-list.html',
+  styleUrl: './reminder-list.scss',
 })
 
 export class ReminderListComponent implements OnInit {

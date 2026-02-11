@@ -6,8 +6,8 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   selector: 'app-share-code-dialog',
   imports: [CommonModule],
-  templateUrl: './share-code-dialog.html',
-  styleUrl: './share-code-dialog.scss',
+  templateUrl: './share-code.html',
+  styleUrl: './share-code.scss',
 })
 export class ShareCodeDialog {
 
