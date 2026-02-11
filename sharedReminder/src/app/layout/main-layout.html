@@ -1,0 +1,21 @@
+<div
+  class="min-h-screen bg-gradient-to-br from-purple-200 via-pink-200 to-orange-200 dark:from-slate-950 dark:via-purple-950/30 dark:to-slate-900 transition-colors duration-500">
+  <app-header (menuClick)="toggleSidebar()"></app-header>
+
+  <div class="flex relative">
+    <div *ngIf="sidebarOpen"
+      class="fixed inset-0 bg-black/30 dark:bg-black/60 backdrop-blur-sm z-40 lg:hidden transition-opacity"
+      (click)="toggleSidebar()">
+    </div>
+
+    <app-sidebar [isOpen]="sidebarOpen" (closeMenu)="closeSidebar()">
+    </app-sidebar>
+
+    <main class="flex-1 p-4 lg:p-8 max-w-4xl mx-auto w-full">
+      <div class="animate-in fade-in duration-500">
+        <router-outlet></router-outlet>
+        <app-reminder-list></app-reminder-list>
+      </div>
+    </main>
+  </div>
+</div>

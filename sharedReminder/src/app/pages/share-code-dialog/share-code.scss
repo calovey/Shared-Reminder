@@ -1,0 +1,149 @@
+$offset: 187;
+$duration: 1.4s;
+
+.spinner {
+    animation: rotator $duration linear infinite;
+}
+
+@keyframes rotator {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(270deg);
+    }
+}
+
+.path {
+    stroke-dasharray: $offset;
+    stroke-dashoffset: 0;
+    transform-origin: center;
+    animation:
+        dash $duration ease-in-out infinite,
+        colors ($duration*4) ease-in-out infinite;
+}
+
+@keyframes colors {
+    0% {
+        stroke: #4285F4;
+    }
+
+    25% {
+        stroke: #DE3E35;
+    }
+
+    50% {
+        stroke: #F7C223;
+    }
+
+    75% {
+        stroke: #1B9A59;
+    }
+
+    100% {
+        stroke: #4285F4;
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: $offset;
+    }
+
+    50% {
+        stroke-dashoffset: $offset/4;
+        transform: rotate(135deg);
+    }
+
+    100% {
+        stroke-dashoffset: $offset;
+        transform: rotate(450deg);
+    }
+}
+
+.action-btn {
+    transition:
+        background-color 0.2s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
+    }
+}
+
+.social-medias {
+    .share-icons {
+        display: flex;
+        gap: 12px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #374151; // gray-700
+        background: #f3f4f6; // gray-100
+        font-size: 18px;
+        text-decoration: none;
+
+        transition:
+            background-color 0.25s ease,
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            color 0.2s ease;
+
+        &:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+            color: #fff;
+        }
+
+        &:active {
+            transform: scale(0.96);
+        }
+    }
+
+    /* Platform colors */
+    .facebook:hover {
+        background: #1877f2;
+    }
+
+    .twitter:hover {
+        background: #000000;
+    }
+
+    .instagram:hover {
+        background: linear-gradient(45deg,
+                #f58529,
+                #dd2a7b,
+                #8134af,
+                #515bd4);
+    }
+
+    .whatsapp:hover {
+        background: #25d366;
+    }
+
+    .telegram:hover {
+        background: #229ed9;
+    }
+}
