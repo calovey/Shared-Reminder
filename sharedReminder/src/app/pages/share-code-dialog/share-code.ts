@@ -1,6 +1,7 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { WorkspaceService } from '../../core/services/workspaceService';
 
 @Component({
   standalone: true,
@@ -18,57 +19,45 @@ export class ShareCodeDialog {
   constructor(
     private dialogRef: DialogRef<ShareCodeDialog>,
     private _cdr: ChangeDetectorRef,
+    private _workspaceService: WorkspaceService,
     @Inject(DIALOG_DATA) public data: any
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.isLoading = true;
 
-    setTimeout(() => {
-      this.workspaceCode = this.generateWorkspaceCode();
-      this.isLoading = false;
-      this._cdr.detectChanges();
-    }, 1000);
+    // min 300-500ms spinner
+    setTimeout(async () => {
+      try {
+        this.workspaceCode = await this._workspaceService.getOrCreateWorkspace();
+        this.isLoading = false;
+        this._cdr.detectChanges();
+      } catch (err) {
+        console.error(err);
+        this.isLoading = false;
+        this._cdr.detectChanges();
+      }
+    }, 400);
   }
 
   close() {
     this.dialogRef.close();
   }
 
-  generateWorkspaceCode(length: number = 6): string {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-    // O, 0, I, 1 not exist → for prevent complicate
-
-    let result = '';
-    const array = new Uint32Array(length);
-    crypto.getRandomValues(array);
-
-    for (let i = 0; i < length; i++) {
-      result += chars[array[i] % chars.length];
-    }
-
-    return result;
-    //this.isLoading = false;
-  }
-
-  copyCode() {
-    if (this.copied) return; // lock for click
+  async copyCode() {
+    if (this.copied) return;
     if (!this.workspaceCode) return;
 
-    // Modern browsers (PWA + iOS)
-    navigator.clipboard.writeText(this.workspaceCode).then(() => {
-      this.copied = true;
+    await navigator.clipboard.writeText(this.workspaceCode);
+
+    this.copied = true;
+    this._cdr.detectChanges();
+
+    if (navigator.vibrate) navigator.vibrate(56);
+
+    setTimeout(() => {
+      this.copied = false;
       this._cdr.detectChanges();
-
-      // if small haptic (iOS / Android)
-      if (navigator.vibrate) {
-        navigator.vibrate(56);
-      }
-
-      setTimeout(() => {
-        this.copied = false;
-        this._cdr.detectChanges();
-      }, 2000);
-    });
+    }, 2000);
   }
 }

@@ -13,14 +13,14 @@
         <div class="relative">
           <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-red-300 to-red-400 rounded-full"></div>
 
-          <textarea [(ngModel)]="newReminder" (keydown)="onKeyDown($event)" placeholder="Type your reminder here..."
+          <textarea [(ngModel)]="newReminder"  placeholder="Type your reminder here..."
             class="w-full pl-6 pr-4 py-2 bg-transparent resize-none focus:outline-none text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500"
             style="background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(229, 231, 235, 0.1) 31px, rgba(229, 231, 235, 0.1) 32px); line-height: 32px; min-height: 96px;"
             rows="3">
           </textarea>
         </div>
 
-        <button (click)="addReminder()"
+        <button
           class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <div class="space-y-4">
+  <!-- <div class="space-y-4">
     <div *ngFor="let reminder of reminders"
       class="relative bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 rounded-2xl p-1 shadow-lg hover:shadow-xl transition-all duration-300">
       <div class="bg-white dark:bg-gray-800 rounded-[14px] p-5 transition-colors duration-300">
@@ -55,5 +55,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
