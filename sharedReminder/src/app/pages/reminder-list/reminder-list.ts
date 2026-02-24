@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Reminder } from '../../core/models/reminderModel';
@@ -24,6 +24,7 @@ export class ReminderListComponent implements OnInit {
   constructor(private _route: ActivatedRoute,
     private _reminderService: ReminderService,
     private _workspaceService: WorkspaceService,
+    private _cdr: ChangeDetectorRef,
   ) { }
 
   async ngOnInit() {
@@ -39,14 +40,17 @@ export class ReminderListComponent implements OnInit {
 
     await this._reminderService.addReminder(this.workspaceCode, this.newReminder.trim());
     this.newReminder = '';
+    this._cdr.detectChanges();
   }
 
   async toggleComplete(reminder: Reminder) {
     await this._reminderService.toggleComplete(this.workspaceCode, reminder);
+    this._cdr.detectChanges();
   }
 
   async deleteReminder(reminder: Reminder) {
     if (!reminder.id) return;
     await this._reminderService.deleteReminder(this.workspaceCode, reminder.id);
+    this._cdr.detectChanges();
   }
 }
