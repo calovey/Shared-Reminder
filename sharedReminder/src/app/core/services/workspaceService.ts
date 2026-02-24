@@ -63,7 +63,8 @@ export class WorkspaceService {
     }
 
     async createWorkspace(): Promise<string> {
-        const uid = this._auth.currentUser?.uid ?? null;
+
+        const uid = await this.waitForAuth();
 
         for (let i = 0; i < 5; i++) {
             const code = this.generateWorkspaceCode(6);
@@ -75,7 +76,7 @@ export class WorkspaceService {
             await setDoc(ref, {
                 createdAt: serverTimestamp(),
                 createdBy: uid,
-                members: uid ? [uid] : []
+                members: [uid]
             });
 
             this.setLocalWorkspaceCode(code);
@@ -103,5 +104,21 @@ export class WorkspaceService {
         }
 
         this.setLocalWorkspaceCode(cleaned);
+    }
+
+    private async waitForAuth(): Promise<string> {
+        return new Promise((resolve, reject) => {
+            const unsubscribe = this._auth.onAuthStateChanged((user) => {
+                if (user) {
+                    unsubscribe();
+                    resolve(user.uid);
+                }
+            });
+
+            setTimeout(() => {
+                unsubscribe();
+                reject(new Error('Auth timeout'));
+            }, 5000);
+        });
     }
 }
