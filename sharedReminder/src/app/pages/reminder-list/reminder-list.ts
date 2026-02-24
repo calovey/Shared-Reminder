@@ -1,14 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-
-interface Reminder {
-  id: number;
-  text: string;
-  time: string;
-  completed: boolean;
-}
+import { Reminder } from '../../core/models/reminderModel';
+import { Observable } from 'rxjs';
+import { ReminderService } from '../../core/services/reminderService';
+import { WorkspaceService } from '../../core/services/workspaceService';
 
 @Component({
   standalone: true,
@@ -20,50 +17,40 @@ interface Reminder {
 
 export class ReminderListComponent implements OnInit {
 
-  listName = '';
+  workspaceCode = '';
+  reminders: Reminder[] = [];
   newReminder = '';
-  reminders: Reminder[] = [
-    { id: 1, text: 'Buy groceries for weekend', time: '10:00 AM', completed: false },
-    { id: 2, text: 'Call dentist for appointment', time: '2:30 PM', completed: false },
-    { id: 3, text: 'Finish project presentation', time: '5:00 PM', completed: true },
-  ];
 
-  constructor(private _route: ActivatedRoute) { }
+  constructor(private _route: ActivatedRoute,
+    private _reminderService: ReminderService,
+    private _workspaceService: WorkspaceService,
+    private _cdr: ChangeDetectorRef,
+  ) { }
 
-  ngOnInit(): void {
-    this._route.params.subscribe(params => {
-      this.listName = params['listname'] || 'unforgettable';
+  async ngOnInit() {
+    this.workspaceCode = await this._workspaceService.getOrCreateWorkspace();
+
+    this._reminderService.getReminders(this.workspaceCode).subscribe((items) => {
+      this.reminders = items;
     });
   }
 
-  addReminder() {
-    if (this.newReminder.trim()) {
-      const newItem: Reminder = {
-        id: Date.now(),
-        text: this.newReminder,
-        time: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }),
-        completed: false
-      };
-      this.reminders = [...this.reminders, newItem];
-      this.newReminder = '';
-    }
+  async addReminder() {
+    if (!this.newReminder.trim()) return;
+
+    await this._reminderService.addReminder(this.workspaceCode, this.newReminder.trim());
+    this.newReminder = '';
+    this._cdr.detectChanges();
   }
 
-  toggleComplete(id: number) {
-    this.reminders = this.reminders.map(r =>
-      r.id === id ? { ...r, completed: !r.completed } : r
-    );
+  async toggleComplete(reminder: Reminder) {
+    await this._reminderService.toggleComplete(this.workspaceCode, reminder);
+    this._cdr.detectChanges();
   }
 
-  deleteReminder(id: number) {
-    this.reminders = this.reminders.filter(r => r.id !== id);
+  async deleteReminder(reminder: Reminder) {
+    if (!reminder.id) return;
+    await this._reminderService.deleteReminder(this.workspaceCode, reminder.id);
+    this._cdr.detectChanges();
   }
-
-  onKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault();
-      this.addReminder();
-    }
-  }
-
 }

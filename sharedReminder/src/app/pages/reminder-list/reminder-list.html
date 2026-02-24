@@ -13,15 +13,16 @@
         <div class="relative">
           <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-red-300 to-red-400 rounded-full"></div>
 
-          <textarea [(ngModel)]="newReminder" (keydown)="onKeyDown($event)" placeholder="Type your reminder here..."
+          <textarea [(ngModel)]="newReminder" placeholder="Type your reminder here..."
             class="w-full pl-6 pr-4 py-2 bg-transparent resize-none focus:outline-none text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500"
             style="background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(229, 231, 235, 0.1) 31px, rgba(229, 231, 235, 0.1) 32px); line-height: 32px; min-height: 96px;"
             rows="3">
           </textarea>
         </div>
 
-        <button (click)="addReminder()"
-          class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
+        <button
+          class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+          (click)="addReminder()" F>
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
           </svg>
@@ -36,7 +37,7 @@
       class="relative bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 rounded-2xl p-1 shadow-lg hover:shadow-xl transition-all duration-300">
       <div class="bg-white dark:bg-gray-800 rounded-[14px] p-5 transition-colors duration-300">
         <div class="flex items-start gap-4">
-          <button (click)="toggleComplete(reminder.id)"
+          <button (click)="toggleComplete(reminder)"
             [class]="'flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ' + 
             (reminder.completed ? 'bg-gradient-to-br from-purple-500 to-pink-500 border-transparent' : 'border-gray-300 dark:border-gray-600 hover:border-purple-500')">
             <svg *ngIf="reminder.completed" class="w-4 h-4 text-white" fill="none" stroke="currentColor"
@@ -46,8 +47,7 @@
           </button>
 
           <div class="flex-1 min-w-0">
-            <p
-              [class]="'transition-all duration-200 ' + 
+            <p [class]="'transition-all duration-200 ' + 
               (reminder.completed ? 'line-through opacity-40 text-gray-500' : 'text-gray-800 dark:text-gray-200')">
               {{ reminder.text }}
             </p>
