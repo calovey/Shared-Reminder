@@ -12,7 +12,6 @@
 
         <div class="relative">
           <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-red-300 to-red-400 rounded-full"></div>
-
           <textarea [(ngModel)]="newReminder" placeholder="Type your reminder here..."
             class="w-full pl-6 pr-4 py-2 bg-transparent resize-none focus:outline-none text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500"
             style="background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(229, 231, 235, 0.1) 31px, rgba(229, 231, 235, 0.1) 32px); line-height: 32px; min-height: 96px;"
@@ -34,24 +33,31 @@
 
   <div class="space-y-4">
     <div *ngFor="let reminder of reminders"
-      class="relative bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 rounded-2xl p-1 shadow-lg hover:shadow-xl transition-all duration-300">
-      <div class="bg-white dark:bg-gray-800 rounded-[14px] p-5 transition-colors duration-300">
-        <div class="flex items-start gap-4">
+      class="relative bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 rounded-2xl p-0.5 shadow-lg hover:shadow-xl transition-all duration-300">
+      <div class="bg-white dark:bg-gray-800 rounded-[14px] py-4 px-5 transition-colors duration-300">
+        <div class="flex items-center gap-4">
           <button (click)="toggleComplete(reminder)"
             [class]="'flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-200 ' + 
-            (reminder.completed ? 'bg-gradient-to-br from-purple-500 to-pink-500 border-transparent' : 'border-gray-300 dark:border-gray-600 hover:border-purple-500')">
+          (reminder.completed ? 'bg-gradient-to-br from-purple-500 to-pink-500 border-transparent' : 'border-gray-300 dark:border-gray-600 hover:border-purple-500')">
             <svg *ngIf="reminder.completed" class="w-4 h-4 text-white" fill="none" stroke="currentColor"
               viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
             </svg>
           </button>
-
           <div class="flex-1 min-w-0">
-            <p [class]="'transition-all duration-200 ' + 
-              (reminder.completed ? 'line-through opacity-40 text-gray-500' : 'text-gray-800 dark:text-gray-200')">
+            <p
+              [class]="'transition-all duration-200 ' +  (reminder.completed ? 'line-through opacity-40 text-gray-500' : 'text-gray-800 dark:text-gray-200 text-lg')">
               {{ reminder.text }}
             </p>
           </div>
+          <button (click)="deleteReminder(reminder)"
+            class="flex-shrink-0 p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all duration-200 active:scale-90"
+            title="Sil">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>

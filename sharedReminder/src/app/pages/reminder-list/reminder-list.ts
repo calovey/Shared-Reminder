@@ -21,7 +21,7 @@ export class ReminderListComponent implements OnInit {
   reminders: Reminder[] = [];
   newReminder = '';
 
-  constructor(private _route: ActivatedRoute,
+  constructor(
     private _reminderService: ReminderService,
     private _workspaceService: WorkspaceService,
     private _cdr: ChangeDetectorRef,
@@ -29,9 +29,13 @@ export class ReminderListComponent implements OnInit {
 
   async ngOnInit() {
     this.workspaceCode = await this._workspaceService.getOrCreateWorkspace();
+    this.loadReminders();
+  }
 
+  loadReminders() {
     this._reminderService.getReminders(this.workspaceCode).subscribe((items) => {
       this.reminders = items;
+      this._cdr.detectChanges();
     });
   }
 
@@ -40,17 +44,25 @@ export class ReminderListComponent implements OnInit {
 
     await this._reminderService.addReminder(this.workspaceCode, this.newReminder.trim());
     this.newReminder = '';
+    this.loadReminders();
     this._cdr.detectChanges();
   }
 
   async toggleComplete(reminder: Reminder) {
     await this._reminderService.toggleComplete(this.workspaceCode, reminder);
+    reminder.completed = !reminder.completed;
     this._cdr.detectChanges();
   }
 
   async deleteReminder(reminder: Reminder) {
     if (!reminder.id) return;
-    await this._reminderService.deleteReminder(this.workspaceCode, reminder.id);
-    this._cdr.detectChanges();
+
+    try {
+      await this._reminderService.deleteReminder(this.workspaceCode, reminder.id);
+      this.reminders = this.reminders.filter(r => r.id !== reminder.id);
+      this._cdr.detectChanges();
+    } catch (error) {
+      console.error('error', error);
+    }
   }
 }
