@@ -3,6 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShareCodeDialog } from '../../../pages/share-code-dialog/share-code';
 import { ThemeService } from '../../../../theme.service';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -17,6 +18,7 @@ export class HeaderComponent {
   constructor(
     private _dialog: Dialog,
     private _theme: ThemeService,
+    private _router: Router
   ) {
     this.theme$ = this._theme.theme$;
   }
@@ -38,5 +40,9 @@ export class HeaderComponent {
       },
       backdropClass: 'bg-black/40',
     });
+  }
+
+  onLogout() {
+    this._router.navigate(['/login']);
   }
 }
