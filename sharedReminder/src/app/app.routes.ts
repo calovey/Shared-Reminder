@@ -23,12 +23,12 @@ export const routes: Routes = [
         redirectTo: 'reminders/unforgettable',
         pathMatch: 'full'
       },
-      // {
-      //   path: 'reminders/:listName',
-      //   loadComponent: () =>
-      //     import('./pages/reminder-list/reminder-list.component')
-      //       .then(m => m.ReminderListComponent)
-      // }
+      {
+        path: 'reminders/:listName',
+        loadComponent: () =>
+          import('./pages/reminder-list/reminder-list')
+            .then(m => m.ReminderListComponent)
+      }
     ]
   },
 
