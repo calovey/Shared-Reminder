@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Reminder } from '../../core/models/reminderModel';
-import { Observable } from 'rxjs';
 import { ReminderService } from '../../core/services/reminderService';
 import { WorkspaceService } from '../../core/services/workspaceService';
 
@@ -14,12 +13,12 @@ import { WorkspaceService } from '../../core/services/workspaceService';
   templateUrl: './reminder-list.html',
   styleUrl: './reminder-list.scss',
 })
-
-export class ReminderListComponent implements OnInit {
-
+export class ReminderListComponent implements OnInit, OnDestroy {
   workspaceCode = '';
   reminders: Reminder[] = [];
   newReminder = '';
+
+  private remindersSubscription?: Subscription;
 
   constructor(
     private _reminderService: ReminderService,
@@ -32,8 +31,13 @@ export class ReminderListComponent implements OnInit {
     this.loadReminders();
   }
 
+  ngOnDestroy() {
+    this.remindersSubscription?.unsubscribe();
+  }
+
   loadReminders() {
-    this._reminderService.getReminders(this.workspaceCode).subscribe((items) => {
+    this.remindersSubscription?.unsubscribe();
+    this.remindersSubscription = this._reminderService.getReminders(this.workspaceCode).subscribe((items) => {
       this.reminders = items;
       this._cdr.detectChanges();
     });
@@ -44,7 +48,6 @@ export class ReminderListComponent implements OnInit {
 
     await this._reminderService.addReminder(this.workspaceCode, this.newReminder.trim());
     this.newReminder = '';
-    this.loadReminders();
     this._cdr.detectChanges();
   }
 
