@@ -3,12 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './components/sidebar/sidebar';
-import { ReminderListComponent } from "../pages/reminder-list/reminder-list";
 
 @Component({
   standalone: true,
   selector: 'app-main-layout',
-  imports: [RouterOutlet, HeaderComponent, CommonModule, SidebarComponent, ReminderListComponent],
+  imports: [RouterOutlet, HeaderComponent, CommonModule, SidebarComponent],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.scss',
 })

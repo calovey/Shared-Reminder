@@ -1,14 +1,50 @@
 import { Routes } from '@angular/router';
 import { MainLayout } from './layout/main-layout';
-//import { ReminderListComponent } from './pages/reminder-list/reminder-list.component';
+import { AuthShellComponent } from './pages/auth-shell/auth-shell';
+import { LoginComponent } from './pages/login/login';
+import { RegisterComponent } from './pages/register/register';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    component: MainLayout,
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
+    component: AuthShellComponent,
     children: [
-      { path: '', redirectTo: 'reminders/unforgettable', pathMatch: 'full' },
-      //{ path: 'reminders/:listName', component: ReminderListComponent }
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
+        path: 'register',
+        component: RegisterComponent
+      }
     ]
+  },
+  {
+    path: 'app',
+    component: MainLayout,
+    canActivate: [authGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: 'reminders/unforgettable',
+        pathMatch: 'full'
+      },
+      {
+        path: 'reminders/:listName',
+        loadComponent: () =>
+          import('./pages/reminder-list/reminder-list')
+            .then(m => m.ReminderListComponent)
+      }
+    ]
+  },
+  {
+    path: '**',
+    redirectTo: 'login'
   }
 ];

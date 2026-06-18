@@ -1,14 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-
-interface Reminder {
-  id: number;
-  text: string;
-  time: string;
-  completed: boolean;
-}
+import { Subscription } from 'rxjs';
+import { Reminder } from '../../core/models/reminderModel';
+import { ReminderService } from '../../core/services/reminderService';
+import { WorkspaceService } from '../../core/services/workspaceService';
 
 @Component({
   standalone: true,
@@ -17,53 +13,59 @@ interface Reminder {
   templateUrl: './reminder-list.html',
   styleUrl: './reminder-list.scss',
 })
-
-export class ReminderListComponent implements OnInit {
-
-  listName = '';
+export class ReminderListComponent implements OnInit, OnDestroy {
+  workspaceCode = '';
+  reminders: Reminder[] = [];
   newReminder = '';
-  reminders: Reminder[] = [
-    { id: 1, text: 'Buy groceries for weekend', time: '10:00 AM', completed: false },
-    { id: 2, text: 'Call dentist for appointment', time: '2:30 PM', completed: false },
-    { id: 3, text: 'Finish project presentation', time: '5:00 PM', completed: true },
-  ];
 
-  constructor(private _route: ActivatedRoute) { }
+  private remindersSubscription?: Subscription;
 
-  ngOnInit(): void {
-    this._route.params.subscribe(params => {
-      this.listName = params['listname'] || 'unforgettable';
+  constructor(
+    private _reminderService: ReminderService,
+    private _workspaceService: WorkspaceService,
+    private _cdr: ChangeDetectorRef,
+  ) { }
+
+  async ngOnInit() {
+    this.workspaceCode = await this._workspaceService.getOrCreateWorkspace();
+    this.loadReminders();
+  }
+
+  ngOnDestroy() {
+    this.remindersSubscription?.unsubscribe();
+  }
+
+  loadReminders() {
+    this.remindersSubscription?.unsubscribe();
+    this.remindersSubscription = this._reminderService.getReminders(this.workspaceCode).subscribe((items) => {
+      this.reminders = items;
+      this._cdr.detectChanges();
     });
   }
 
-  addReminder() {
-    if (this.newReminder.trim()) {
-      const newItem: Reminder = {
-        id: Date.now(),
-        text: this.newReminder,
-        time: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }),
-        completed: false
-      };
-      this.reminders = [...this.reminders, newItem];
-      this.newReminder = '';
+  async addReminder() {
+    if (!this.newReminder.trim()) return;
+
+    await this._reminderService.addReminder(this.workspaceCode, this.newReminder.trim());
+    this.newReminder = '';
+    this._cdr.detectChanges();
+  }
+
+  async toggleComplete(reminder: Reminder) {
+    await this._reminderService.toggleComplete(this.workspaceCode, reminder);
+    reminder.completed = !reminder.completed;
+    this._cdr.detectChanges();
+  }
+
+  async deleteReminder(reminder: Reminder) {
+    if (!reminder.id) return;
+
+    try {
+      await this._reminderService.deleteReminder(this.workspaceCode, reminder.id);
+      this.reminders = this.reminders.filter(r => r.id !== reminder.id);
+      this._cdr.detectChanges();
+    } catch (error) {
+      console.error('error', error);
     }
   }
-
-  toggleComplete(id: number) {
-    this.reminders = this.reminders.map(r =>
-      r.id === id ? { ...r, completed: !r.completed } : r
-    );
-  }
-
-  deleteReminder(id: number) {
-    this.reminders = this.reminders.filter(r => r.id !== id);
-  }
-
-  onKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault();
-      this.addReminder();
-    }
-  }
-
 }

@@ -14,9 +14,9 @@ export class SidebarComponent {
   @Output() closeMenu = new EventEmitter<void>();
 
   lists = [
-    { id: 'unforgettable', name: 'Unforgettable', route: '/reminders/unforgettable' },
-    { id: 'shopping', name: 'Shopping', route: '/reminders/shopping' },
-    { id: 'todos', name: 'Todos', route: '/reminders/todos' }
+    { id: 'unforgettable', name: 'Unforgettable', route: '/app/reminders/unforgettable' },
+    { id: 'shopping', name: 'Shopping', route: '/app/reminders/shopping' },
+    { id: 'todos', name: 'Todos', route: '/app/reminders/todos' }
   ];
 
   activeList = 'unforgettable';
