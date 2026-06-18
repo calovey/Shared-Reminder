@@ -1,9 +1,10 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShareCodeDialog } from '../../../pages/share-code-dialog/share-code';
 import { ThemeService } from '../../../../theme.service';
 import { Router } from '@angular/router';
+import { Auth, signOut } from '@angular/fire/auth';
 
 @Component({
   standalone: true,
@@ -14,6 +15,8 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   theme$;
+
+  private auth = inject(Auth);
 
   constructor(
     private _dialog: Dialog,
@@ -42,7 +45,12 @@ export class HeaderComponent {
     });
   }
 
-  onLogout() {
-    this._router.navigate(['/login']);
+  async onLogout() {
+    try {
+      await signOut(this.auth);
+      this._router.navigate(['/login']);
+    } catch (error) {
+      console.error('Çıkış yapılırken hata oluştu:', error);
+    }
   }
 }

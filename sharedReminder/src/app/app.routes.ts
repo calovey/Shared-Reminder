@@ -3,6 +3,7 @@ import { MainLayout } from './layout/main-layout';
 import { AuthShellComponent } from './pages/auth-shell/auth-shell';
 import { LoginComponent } from './pages/login/login';
 import { RegisterComponent } from './pages/register/register';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,7 @@ export const routes: Routes = [
   {
     path: 'app',
     component: MainLayout,
+    canActivate: [authGuard],
     children: [
       {
         path: '',
