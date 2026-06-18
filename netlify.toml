@@ -1,7 +1,6 @@
 [build]
-  base = "sharedReminder"
-  command = "npm run build"
-  publish = "dist/sharedReminder"
+  command = "cd sharedReminder && npm run build"
+  publish = "sharedReminder/dist/sharedReminder"
 
 [[redirects]]
   from = "/*"
