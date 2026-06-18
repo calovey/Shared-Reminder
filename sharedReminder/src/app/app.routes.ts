@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { MainLayout } from './layout/main-layout';
+import { AuthShellComponent } from './pages/auth-shell/auth-shell';
 import { LoginComponent } from './pages/login/login';
+import { RegisterComponent } from './pages/register/register';
 
 export const routes: Routes = [
   {
@@ -8,12 +10,20 @@ export const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
-
   {
-    path: 'login',
-    component: LoginComponent
+    path: '',
+    component: AuthShellComponent,
+    children: [
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
+        path: 'register',
+        component: RegisterComponent
+      }
+    ]
   },
-
   {
     path: 'app',
     component: MainLayout,
@@ -31,7 +41,6 @@ export const routes: Routes = [
       }
     ]
   },
-
   {
     path: '**',
     redirectTo: 'login'

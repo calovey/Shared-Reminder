@@ -4,31 +4,36 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './login.html',
-  styleUrl: './login.scss',
+  templateUrl: './register.html',
+  styleUrl: './register.scss',
 })
-export class LoginComponent {
+export class RegisterComponent {
+  fullName = '';
   email = '';
   password = '';
-  rememberMe = false;
+  confirmPassword = '';
   loading = false;
   errorMessage = '';
 
   constructor(private _router: Router) { }
 
-  login() {
-    if (!this.email || !this.password) {
-      this.errorMessage = 'E-posta ve şifre zorunlu';
+  register() {
+    if (!this.fullName || !this.email || !this.password || !this.confirmPassword) {
+      this.errorMessage = 'Lütfen tüm alanları doldurun.';
+      return;
+    }
+
+    if (this.password !== this.confirmPassword) {
+      this.errorMessage = 'Şifreler eşleşmiyor.';
       return;
     }
 
     this.loading = true;
     this.errorMessage = '';
 
-    // Temporary flow until Firebase auth is wired in.
     setTimeout(() => {
       this.loading = false;
       this._router.navigate(['/app']);

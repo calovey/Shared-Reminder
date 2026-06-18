@@ -1,0 +1,22 @@
+<div class="fixed inset-0 bg-space overflow-hidden flex items-center justify-center transition-all p-4">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-1 h-1 bg-white rounded-full animate-twinkle"></div>
+    <div class="absolute top-1/3 right-1/4 w-1.5 h-1.5 bg-white rounded-full animate-twinkle-slow"></div>
+    <div class="absolute bottom-1/4 left-1/2 w-1 h-1 bg-indigo-400 rounded-full animate-twinkle-mid"></div>
+
+    <div
+      class="shooting-star"
+      style="top: 10%; right: -100px; width: 150px; animation-duration: 4s; animation-delay: 0s;"
+    ></div>
+    <div
+      class="shooting-star"
+      style="top: 40%; right: -100px; width: 200px; animation-duration: 6s; animation-delay: 2s;"
+    ></div>
+  </div>
+
+  <div
+    class="relative z-10 auth-panel bg-white/90 dark:bg-gray-900/90 backdrop-blur-md rounded-2xl shadow-2xl w-full max-w-md p-8 border border-white/20 dark:border-gray-800 transition-colors duration-300"
+  >
+    <router-outlet></router-outlet>
+  </div>
+</div>
