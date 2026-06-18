@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, updateProfile } from '@angular/fire/auth';
+import { Firestore } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 
 @Component({
   selector: 'app-register',
@@ -20,6 +22,7 @@ export class RegisterComponent {
   errorMessage = '';
 
   private auth = inject(Auth);
+  private firestore = inject(Firestore);
 
   constructor(private _router: Router) { }
 
@@ -46,6 +49,12 @@ export class RegisterComponent {
       const userCredential = await createUserWithEmailAndPassword(this.auth, this.email, this.password);
 
       await updateProfile(userCredential.user, { displayName: this.fullName });
+      await setDoc(doc(this.firestore, `users/${userCredential.user.uid}`), {
+        email: this.email,
+        displayName: this.fullName,
+        activeWorkspaceCode: null,
+        createdAt: serverTimestamp()
+      }, { merge: true });
       this._router.navigate(['/app']);
 
     } catch (error: any) {
