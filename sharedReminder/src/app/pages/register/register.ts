@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Auth, createUserWithEmailAndPassword, updateProfile } from '@angular/fire/auth';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
@@ -18,9 +19,11 @@ export class RegisterComponent {
   loading = false;
   errorMessage = '';
 
+  private auth = inject(Auth);
+
   constructor(private _router: Router) { }
 
-  register() {
+  async register() {
     if (!this.fullName || !this.email || !this.password || !this.confirmPassword) {
       this.errorMessage = 'Lütfen tüm alanları doldurun.';
       return;
@@ -31,12 +34,33 @@ export class RegisterComponent {
       return;
     }
 
+    if (this.password.length < 6) {
+      this.errorMessage = 'Şifre en az 6 karakter olmalı.';
+      return;
+    }
+
     this.loading = true;
     this.errorMessage = '';
 
-    setTimeout(() => {
-      this.loading = false;
+    try {
+      const userCredential = await createUserWithEmailAndPassword(this.auth, this.email, this.password);
+
+      await updateProfile(userCredential.user, { displayName: this.fullName });
       this._router.navigate(['/app']);
-    }, 1000);
+
+    } catch (error: any) {
+      if (error.code === 'auth/email-already-in-use') {
+        this.errorMessage = 'Bu e-posta zaten kullanılıyor.';
+      } else if (error.code === 'auth/invalid-email') {
+        this.errorMessage = 'Geçersiz e-posta adresi.';
+      } else if (error.code === 'auth/weak-password') {
+        this.errorMessage = 'Şifre çok zayıf.';
+      } else {
+        this.errorMessage = 'Kayıt oluşturulamadı.';
+      }
+    }
+    finally {
+      this.loading = false;
+    }
   }
 }
