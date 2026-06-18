@@ -5,6 +5,7 @@ import { Firestore } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { NotificaitonService } from '../../core/services/notificationService';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +15,10 @@ import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
   styleUrl: './register.scss',
 })
 export class RegisterComponent {
+  private notification = inject(NotificaitonService);
+  private auth = inject(Auth);
+  private firestore = inject(Firestore);
+
   fullName = '';
   email = '';
   password = '';
@@ -21,24 +26,27 @@ export class RegisterComponent {
   loading = false;
   errorMessage = '';
 
-  private auth = inject(Auth);
-  private firestore = inject(Firestore);
-
   constructor(private _router: Router) { }
 
   async register() {
     if (!this.fullName || !this.email || !this.password || !this.confirmPassword) {
-      this.errorMessage = 'Lütfen tüm alanları doldurun.';
+      const message = 'Lutfen tum alanlari doldurun.';
+      this.errorMessage = message;
+      this.notification.showWarning(message, 'Eksik Alan');
       return;
     }
 
     if (this.password !== this.confirmPassword) {
-      this.errorMessage = 'Şifreler eşleşmiyor.';
+      const message = 'Sifreler eslesmiyor.';
+      this.errorMessage = message;
+      this.notification.showWarning(message, 'Hatali Giris');
       return;
     }
 
     if (this.password.length < 6) {
-      this.errorMessage = 'Şifre en az 6 karakter olmalı.';
+      const message = 'Sifre en az 6 karakter olmali.';
+      this.errorMessage = message;
+      this.notification.showWarning(message, 'Zayif Sifre');
       return;
     }
 
@@ -55,20 +63,25 @@ export class RegisterComponent {
         activeWorkspaceCode: null,
         createdAt: serverTimestamp()
       }, { merge: true });
-      this._router.navigate(['/app']);
 
+      this.notification.showSuccess('Hesabiniz olusturuldu.', 'Kayit Basarili');
+      this._router.navigate(['/app']);
     } catch (error: any) {
+      let message = 'Kayit olusturulamadi.';
+
       if (error.code === 'auth/email-already-in-use') {
-        this.errorMessage = 'Bu e-posta zaten kullanılıyor.';
+        message = 'Bu e-posta zaten kullaniliyor.';
       } else if (error.code === 'auth/invalid-email') {
-        this.errorMessage = 'Geçersiz e-posta adresi.';
+        message = 'Gecersiz e-posta adresi.';
       } else if (error.code === 'auth/weak-password') {
-        this.errorMessage = 'Şifre çok zayıf.';
-      } else {
-        this.errorMessage = 'Kayıt oluşturulamadı.';
+        message = 'Sifre cok zayif.';
+      } else if (error.code === 'auth/too-many-requests') {
+        message = 'Cok fazla deneme yapildi. Lutfen biraz sonra tekrar deneyin.';
       }
-    }
-    finally {
+
+      this.errorMessage = message;
+      this.notification.showError(message, 'Kayit Basarisiz');
+    } finally {
       this.loading = false;
     }
   }

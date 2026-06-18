@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { NotificaitonService } from '../../core/services/notificationService';
 
 @Component({
   selector: 'app-login',
@@ -12,19 +13,22 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './login.scss',
 })
 export class LoginComponent {
+  private notification = inject(NotificaitonService);
+  private auth = inject(Auth);
+
   email = '';
   password = '';
   rememberMe = false;
   loading = false;
   errorMessage = '';
 
-  private auth = inject(Auth);
-
   constructor(private _router: Router) { }
 
   async login() {
     if (!this.email || !this.password) {
-      this.errorMessage = 'E-posta ve şifre zorunlu';
+      const message = 'E-posta ve sifre zorunlu.';
+      this.errorMessage = message;
+      this.notification.showWarning(message, 'Eksik Alan');
       return;
     }
 
@@ -33,21 +37,26 @@ export class LoginComponent {
 
     try {
       await signInWithEmailAndPassword(this.auth, this.email, this.password);
+      this.notification.showSuccess('Tekrar hos geldin.', 'Giris Basarili');
       this._router.navigate(['/app']);
     } catch (error: any) {
+      let message = 'Giris yapilamadi.';
+
       if (error.code === 'auth/invalid-credential') {
-        this.errorMessage = 'E-posta veya şifre hatalı.';
+        message = 'Gecersiz e-posta adresi veya sifre.';
       } else if (error.code === 'auth/user-not-found') {
-        this.errorMessage = 'Bu e-posta ile kayıtlı kullanıcı bulunamadı.';
+        message = 'Bu e-posta ile kayitli kullanici bulunamadi.';
       } else if (error.code === 'auth/wrong-password') {
-        this.errorMessage = 'Şifre hatalı.';
+        message = 'Sifre hatali.';
       } else if (error.code === 'auth/invalid-email') {
-        this.errorMessage = 'Geçersiz e-posta adresi.';
-      } else {
-        this.errorMessage = 'Giriş yapılamadı.';
+        message = 'Gecersiz e-posta adresi.';
+      } else if (error.code === 'auth/too-many-requests') {
+        message = 'Cok fazla deneme yapildi. Lutfen biraz sonra tekrar deneyin.';
       }
-    }
-    finally {
+
+      this.errorMessage = message;
+      this.notification.showError(message, 'Giris Basarisiz');
+    } finally {
       this.loading = false;
     }
   }
