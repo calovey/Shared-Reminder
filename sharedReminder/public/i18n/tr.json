@@ -1,0 +1,70 @@
+{
+  "auth": {
+    "fields": {
+      "fullName": "Ad Soyad",
+      "email": "E-posta",
+      "password": "Şifre",
+      "confirmPassword": "Şifre Tekrarı"
+    },
+    "placeholders": {
+      "fullName": "Ad Soyad",
+      "email": "isim@mail.com",
+      "password": "********"
+    },
+    "common": {
+      "or": "VEYA",
+      "errors": {
+        "tooManyRequests": "Çok fazla deneme yapıldı. Lütfen biraz sonra tekrar deneyin."
+      }
+    },
+    "notifications": {
+      "missingField": "Eksik Alan",
+      "invalidInput": "Hatalı Giriş",
+      "weakPassword": "Zayıf Şifre"
+    },
+    "login": {
+      "title": "Hoş Geldiniz",
+      "subtitle": "Devam etmek için hesabınıza giriş yapın.",
+      "rememberMe": "Beni hatırla",
+      "forgotPassword": "Şifremi unuttum?",
+      "submit": "Giriş Yap",
+      "submitting": "Giriş Yapılıyor...",
+      "noAccount": "Hesabınız yok mu?",
+      "signUp": "Kayıt Ol",
+      "errorTitle": "Giriş Başarısız",
+      "success": {
+        "title": "Giriş Başarılı",
+        "message": "Tekrar hoş geldiniz."
+      },
+      "errors": {
+        "requiredFields": "E-posta ve şifre zorunludur.",
+        "failed": "Giriş yapılamadı.",
+        "invalidCredential": "Geçersiz e-posta adresi veya şifre.",
+        "userNotFound": "Bu e-posta ile kayıtlı kullanıcı bulunamadı.",
+        "wrongPassword": "Şifre hatalı.",
+        "invalidEmail": "Geçersiz e-posta adresi."
+      }
+    },
+    "register": {
+      "title": "Hesabınızı Oluşturun",
+      "subtitle": "Hızlıca hesabınızı oluşturun.",
+      "submit": "Kaydı Tamamla",
+      "submitting": "Hesap Oluşturuluyor...",
+      "haveAccount": "Zaten bir hesabınız var mı?",
+      "errorTitle": "Kayıt Başarısız",
+      "success": {
+        "title": "Kayıt Başarılı",
+        "message": "Hesabınız başarıyla oluşturuldu."
+      },
+      "errors": {
+        "requiredFields": "Lütfen tüm alanları doldurun.",
+        "passwordMismatch": "Şifreler eşleşmiyor.",
+        "weakPassword": "Şifre en az 6 karakter olmalıdır.",
+        "failed": "Kayıt oluşturulamadı.",
+        "emailInUse": "Bu e-posta adresi zaten kullanımda.",
+        "invalidEmail": "Geçersiz e-posta adresi.",
+        "passwordTooWeak": "Şifre çok zayıf."
+      }
+    }
+  }
+}
