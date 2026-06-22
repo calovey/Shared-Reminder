@@ -1,0 +1,70 @@
+{
+  "auth": {
+    "fields": {
+      "fullName": "Nombre completo",
+      "email": "Correo electronico",
+      "password": "Contrasena",
+      "confirmPassword": "Confirmar contrasena"
+    },
+    "placeholders": {
+      "fullName": "Juan Perez",
+      "email": "name@mail.com",
+      "password": "********"
+    },
+    "common": {
+      "or": "O",
+      "errors": {
+        "tooManyRequests": "Se hicieron demasiados intentos. Intentalo de nuevo mas tarde."
+      }
+    },
+    "notifications": {
+      "missingField": "Campo faltante",
+      "invalidInput": "Entrada invalida",
+      "weakPassword": "Contrasena debil"
+    },
+    "login": {
+      "title": "Bienvenido",
+      "subtitle": "Inicia sesion en tu cuenta para continuar.",
+      "rememberMe": "Recordarme",
+      "forgotPassword": "Olvidaste tu contrasena?",
+      "submit": "Iniciar sesion",
+      "submitting": "Iniciando sesion...",
+      "noAccount": "No tienes una cuenta?",
+      "signUp": "Registrate",
+      "errorTitle": "Error de inicio de sesion",
+      "success": {
+        "title": "Inicio de sesion exitoso",
+        "message": "Bienvenido de nuevo."
+      },
+      "errors": {
+        "requiredFields": "El correo electronico y la contrasena son obligatorios.",
+        "failed": "No se pudo iniciar sesion.",
+        "invalidCredential": "Correo electronico o contrasena invalidos.",
+        "userNotFound": "No se encontro un usuario con este correo electronico.",
+        "wrongPassword": "La contrasena es incorrecta.",
+        "invalidEmail": "Correo electronico invalido."
+      }
+    },
+    "register": {
+      "title": "Crea tu cuenta",
+      "subtitle": "Crea tu cuenta rapidamente dentro del mismo diseno.",
+      "submit": "Completar registro",
+      "submitting": "Creando cuenta...",
+      "haveAccount": "Ya tienes una cuenta?",
+      "errorTitle": "Registro fallido",
+      "success": {
+        "title": "Registro exitoso",
+        "message": "Tu cuenta ha sido creada."
+      },
+      "errors": {
+        "requiredFields": "Por favor completa todos los campos.",
+        "passwordMismatch": "Las contrasenas no coinciden.",
+        "weakPassword": "La contrasena debe tener al menos 6 caracteres.",
+        "failed": "No se pudo crear la cuenta.",
+        "emailInUse": "Este correo electronico ya esta en uso.",
+        "invalidEmail": "Correo electronico invalido.",
+        "passwordTooWeak": "La contrasena es demasiado debil."
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "auth": {
+    "fields": {
+      "fullName": "Full Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password"
+    },
+    "placeholders": {
+      "fullName": "John Doe",
+      "email": "name@mail.com",
+      "password": "********"
+    },
+    "common": {
+      "or": "OR",
+      "errors": {
+        "tooManyRequests": "Too many attempts were made. Please try again later."
+      }
+    },
+    "notifications": {
+      "missingField": "Missing Field",
+      "invalidInput": "Invalid Input",
+      "weakPassword": "Weak Password"
+    },
+    "login": {
+      "title": "Welcome",
+      "subtitle": "Sign in to your account to continue.",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign In",
+      "submitting": "Signing In...",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign Up",
+      "errorTitle": "Login Failed",
+      "success": {
+        "title": "Login Successful",
+        "message": "Welcome back."
+      },
+      "errors": {
+        "requiredFields": "Email and password are required.",
+        "failed": "Unable to sign in.",
+        "invalidCredential": "Invalid email address or password.",
+        "userNotFound": "No user was found with this email.",
+        "wrongPassword": "The password is incorrect.",
+        "invalidEmail": "Invalid email address."
+      }
+    },
+    "register": {
+      "title": "Create Your Account",
+      "subtitle": "Create your account quickly within the same design.",
+      "submit": "Complete Registration",
+      "submitting": "Creating Account...",
+      "haveAccount": "Already have an account?",
+      "errorTitle": "Registration Failed",
+      "success": {
+        "title": "Registration Successful",
+        "message": "Your account has been created."
+      },
+      "errors": {
+        "requiredFields": "Please fill in all fields.",
+        "passwordMismatch": "Passwords do not match.",
+        "weakPassword": "Password must be at least 6 characters.",
+        "failed": "Unable to create account.",
+        "emailInUse": "This email is already in use.",
+        "invalidEmail": "Invalid email address.",
+        "passwordTooWeak": "Password is too weak."
+      }
+    }
+  }
+}

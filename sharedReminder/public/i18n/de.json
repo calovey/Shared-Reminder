@@ -1,0 +1,70 @@
+{
+  "auth": {
+    "fields": {
+      "fullName": "Vollstandiger Name",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "confirmPassword": "Passwort bestatigen"
+    },
+    "placeholders": {
+      "fullName": "Max Mustermann",
+      "email": "name@mail.com",
+      "password": "********"
+    },
+    "common": {
+      "or": "ODER",
+      "errors": {
+        "tooManyRequests": "Es wurden zu viele Versuche unternommen. Bitte versuche es spater erneut."
+      }
+    },
+    "notifications": {
+      "missingField": "Fehlendes Feld",
+      "invalidInput": "Ungueltige Eingabe",
+      "weakPassword": "Schwaches Passwort"
+    },
+    "login": {
+      "title": "Willkommen",
+      "subtitle": "Melde dich an, um fortzufahren.",
+      "rememberMe": "Angemeldet bleiben",
+      "forgotPassword": "Passwort vergessen?",
+      "submit": "Anmelden",
+      "submitting": "Anmeldung lauft...",
+      "noAccount": "Noch kein Konto?",
+      "signUp": "Registrieren",
+      "errorTitle": "Anmeldung fehlgeschlagen",
+      "success": {
+        "title": "Anmeldung erfolgreich",
+        "message": "Willkommen zuruck."
+      },
+      "errors": {
+        "requiredFields": "E-Mail und Passwort sind erforderlich.",
+        "failed": "Anmeldung konnte nicht durchgefuhrt werden.",
+        "invalidCredential": "Ungueltige E-Mail-Adresse oder falsches Passwort.",
+        "userNotFound": "Kein Benutzer mit dieser E-Mail-Adresse gefunden.",
+        "wrongPassword": "Das Passwort ist falsch.",
+        "invalidEmail": "Ungueltige E-Mail-Adresse."
+      }
+    },
+    "register": {
+      "title": "Erstelle dein Konto",
+      "subtitle": "Erstelle dein Konto schnell im gleichen Design.",
+      "submit": "Registrierung abschliessen",
+      "submitting": "Konto wird erstellt...",
+      "haveAccount": "Hast du bereits ein Konto?",
+      "errorTitle": "Registrierung fehlgeschlagen",
+      "success": {
+        "title": "Registrierung erfolgreich",
+        "message": "Dein Konto wurde erstellt."
+      },
+      "errors": {
+        "requiredFields": "Bitte fulle alle Felder aus.",
+        "passwordMismatch": "Die Passwoerter stimmen nicht ueberein.",
+        "weakPassword": "Das Passwort muss mindestens 6 Zeichen lang sein.",
+        "failed": "Konto konnte nicht erstellt werden.",
+        "emailInUse": "Diese E-Mail-Adresse wird bereits verwendet.",
+        "invalidEmail": "Ungueltige E-Mail-Adresse.",
+        "passwordTooWeak": "Das Passwort ist zu schwach."
+      }
+    }
+  }
+}
