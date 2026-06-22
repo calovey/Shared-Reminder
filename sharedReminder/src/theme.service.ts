@@ -6,11 +6,11 @@ type Theme = 'light' | 'dark';
 @Injectable({ providedIn: 'root' })
 
 export class ThemeService {
-  private themeSubject = new BehaviorSubject<Theme>('light');
+  private themeSubject = new BehaviorSubject<Theme>('dark');
   theme$ = this.themeSubject.asObservable();
 
   constructor() {
-    const savedTheme = (localStorage.getItem('theme') as Theme) || 'light';
+    const savedTheme = (localStorage.getItem('theme') as Theme) || 'dark';
     this.setTheme(savedTheme);
   }
 
