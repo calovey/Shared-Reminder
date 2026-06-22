@@ -13,6 +13,8 @@
     </h1>
 
     <div class="flex items-center gap-2">
+      <app-language-switcher [compact]="true" [align]="'right'"></app-language-switcher>
+
       <button (click)="toggleTheme()" class="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors">
         @if((theme$ | async) === 'dark') {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"

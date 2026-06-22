@@ -4,13 +4,14 @@ import { Auth, createUserWithEmailAndPassword, updateProfile } from '@angular/fi
 import { Firestore } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { NotificaitonService } from '../../core/services/notificationService';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TranslocoModule],
   templateUrl: './register.html',
   styleUrl: './register.scss',
 })
@@ -18,6 +19,7 @@ export class RegisterComponent {
   private notification = inject(NotificaitonService);
   private auth = inject(Auth);
   private firestore = inject(Firestore);
+  private transloco = inject(TranslocoService);
 
   fullName = '';
   email = '';
@@ -26,27 +28,31 @@ export class RegisterComponent {
   loading = false;
   errorMessage = '';
 
-  constructor(private _router: Router) { }
+  constructor(private _router: Router) {}
+
+  private t(key: string): string {
+    return this.transloco.translate(key);
+  }
 
   async register() {
     if (!this.fullName || !this.email || !this.password || !this.confirmPassword) {
-      const message = 'Lutfen tum alanlari doldurun.';
+      const message = this.t('auth.register.errors.requiredFields');
       this.errorMessage = message;
-      this.notification.showWarning(message, 'Eksik Alan');
+      this.notification.showWarning(message, this.t('auth.notifications.missingField'));
       return;
     }
 
     if (this.password !== this.confirmPassword) {
-      const message = 'Sifreler eslesmiyor.';
+      const message = this.t('auth.register.errors.passwordMismatch');
       this.errorMessage = message;
-      this.notification.showWarning(message, 'Hatali Giris');
+      this.notification.showWarning(message, this.t('auth.notifications.invalidInput'));
       return;
     }
 
     if (this.password.length < 6) {
-      const message = 'Sifre en az 6 karakter olmali.';
+      const message = this.t('auth.register.errors.weakPassword');
       this.errorMessage = message;
-      this.notification.showWarning(message, 'Zayif Sifre');
+      this.notification.showWarning(message, this.t('auth.notifications.weakPassword'));
       return;
     }
 
@@ -57,30 +63,34 @@ export class RegisterComponent {
       const userCredential = await createUserWithEmailAndPassword(this.auth, this.email, this.password);
 
       await updateProfile(userCredential.user, { displayName: this.fullName });
-      await setDoc(doc(this.firestore, `users/${userCredential.user.uid}`), {
-        email: this.email,
-        displayName: this.fullName,
-        activeWorkspaceCode: null,
-        createdAt: serverTimestamp()
-      }, { merge: true });
+      await setDoc(
+        doc(this.firestore, `users/${userCredential.user.uid}`),
+        {
+          email: this.email,
+          displayName: this.fullName,
+          activeWorkspaceCode: null,
+          createdAt: serverTimestamp(),
+        },
+        { merge: true },
+      );
 
-      this.notification.showSuccess('Hesabiniz olusturuldu.', 'Kayit Basarili');
+      this.notification.showSuccess(this.t('auth.register.success.message'), this.t('auth.register.success.title'));
       this._router.navigate(['/app']);
     } catch (error: any) {
-      let message = 'Kayit olusturulamadi.';
+      let message = this.t('auth.register.errors.failed');
 
       if (error.code === 'auth/email-already-in-use') {
-        message = 'Bu e-posta zaten kullaniliyor.';
+        message = this.t('auth.register.errors.emailInUse');
       } else if (error.code === 'auth/invalid-email') {
-        message = 'Gecersiz e-posta adresi.';
+        message = this.t('auth.register.errors.invalidEmail');
       } else if (error.code === 'auth/weak-password') {
-        message = 'Sifre cok zayif.';
+        message = this.t('auth.register.errors.passwordTooWeak');
       } else if (error.code === 'auth/too-many-requests') {
-        message = 'Cok fazla deneme yapildi. Lutfen biraz sonra tekrar deneyin.';
+        message = this.t('auth.common.errors.tooManyRequests');
       }
 
       this.errorMessage = message;
-      this.notification.showError(message, 'Kayit Basarisiz');
+      this.notification.showError(message, this.t('auth.register.errorTitle'));
     } finally {
       this.loading = false;
     }

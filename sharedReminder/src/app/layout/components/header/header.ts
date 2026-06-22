@@ -5,11 +5,12 @@ import { Auth, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { ThemeService } from '../../../../theme.service';
 import { ShareCodeDialog } from '../../../pages/share-code-dialog/share-code';
+import { LanguageSwitcherComponent } from '../language-switcher/language-switcher';
 
 @Component({
   standalone: true,
   selector: 'app-header',
-  imports: [CommonModule],
+  imports: [CommonModule, LanguageSwitcherComponent],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })

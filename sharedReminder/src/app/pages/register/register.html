@@ -1,7 +1,6 @@
 <div class="text-center mb-8">
-    <!-- <p class="text-xs uppercase tracking-[0.35em] text-indigo-500 dark:text-indigo-300 mb-3">New Member</p> -->
-    <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">Create Your Account</h2>
-    <p class="text-sm text-gray-600 dark:text-gray-400">Create your account quickly within the same design.</p>
+    <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">{{ 'auth.register.title' | transloco }}</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-400">{{ 'auth.register.subtitle' | transloco }}</p>
 </div>
 
 <form class="space-y-4" (ngSubmit)="register()">
@@ -10,47 +9,43 @@
     </div>
 
     <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ 'auth.fields.fullName' | transloco }}</label>
         <input type="text" [(ngModel)]="fullName" name="fullName" required
             class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all dark:text-white"
-            placeholder="John Doe">
+            [placeholder]="'auth.placeholders.fullName' | transloco">
     </div>
 
     <div>
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ 'auth.fields.email' | transloco }}</label>
         <input type="email" [(ngModel)]="email" name="email" required
             class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all dark:text-white"
-            placeholder="name@mail.com">
+            [placeholder]="'auth.placeholders.email' | transloco">
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ 'auth.fields.password' | transloco }}</label>
             <input type="password" [(ngModel)]="password" name="password" required
                 class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all dark:text-white"
-                placeholder="••••••••">
+                [placeholder]="'auth.placeholders.password' | transloco">
         </div>
 
         <div>
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Confirm Password</label>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ 'auth.fields.confirmPassword' | transloco }}</label>
             <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required
                 class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all dark:text-white"
-                placeholder="••••••••">
+                [placeholder]="'auth.placeholders.password' | transloco">
         </div>
     </div>
 
     <button type="submit" [disabled]="loading"
         class="w-full py-3 px-4 mt-4 bg-gradient-to-r from-indigo-600 to-fuchsia-600 hover:from-indigo-700 hover:to-fuchsia-700 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/30 transition-all active:scale-95 disabled:opacity-50">
-        <span *ngIf="!loading">Complete Registration</span>
-        <span *ngIf="loading">Creating Account...</span>
+        <span *ngIf="!loading">{{ 'auth.register.submit' | transloco }}</span>
+        <span *ngIf="loading">{{ 'auth.register.submitting' | transloco }}</span>
     </button>
 </form>
 
-<!-- <div class="mt-6 rounded-2xl border border-indigo-100/70 dark:border-indigo-900/60 bg-indigo-50/70 dark:bg-indigo-950/30 px-4 py-4 text-sm text-gray-600 dark:text-gray-300">
-    Bu alanı daha sonra üyelik tipi, davet kodu veya workspace seçimi için de kullanabiliriz.
-</div> -->
-
 <p class="mt-8 text-center text-sm text-gray-500">
-    Already have an account?
-    <a routerLink="/login" class="text-indigo-500 dark:text-indigo-400 font-semibold hover:underline">Sign In</a>
+    {{ 'auth.register.haveAccount' | transloco }}
+    <a routerLink="/login" class="text-indigo-500 dark:text-indigo-400 font-semibold hover:underline">{{ 'auth.login.submit' | transloco }}</a>
 </p>
