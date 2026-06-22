@@ -18,7 +18,7 @@ type AppLang = 'en' | 'tr' | 'es' | 'de';
 
 export function initTheme(themeService: ThemeService) {
   return () =>
-    themeService.setTheme((localStorage.getItem('theme') as 'light' | 'dark') || 'light');
+    themeService.setTheme((localStorage.getItem('theme') as 'light' | 'dark') || 'dark');
 }
 
 export function initLanguage(translocoService: TranslocoService) {
