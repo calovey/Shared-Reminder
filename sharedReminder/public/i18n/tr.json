@@ -66,5 +66,49 @@
         "passwordTooWeak": "Şifre çok zayıf."
       }
     }
+  },
+  "header": {
+    "title": "Ortak Çalışma Alanı",
+    "menu": "Menü",
+    "toggleTheme": "Temayı değiştir",
+    "share": "Paylaş",
+    "logout": "Çıkış Yap"
+  },
+  "sidebar": {
+    "newList": "Yeni Liste",
+    "lists": {
+      "unforgettable": "Unutulmayacaklar",
+      "shopping": "Alışveriş",
+      "todos": "Yapılacaklar"
+    }
+  },
+  "reminders": {
+    "newReminder": "Yeni Hatırlatıcı",
+    "placeholder": "Hatırlatıcını buraya yaz...",
+    "add": "Hatırlatıcı Ekle",
+    "delete": "Sil"
+  },
+  "shareCode": {
+    "description": "Birini çalışma alanına davet etmek için bu özel kodu paylaş. Paylaşılan hatırlatıcılarına yalnızca bu koda sahip kişiler erişebilir.",
+    "close": "Kapat",
+    "copy": "Kodu Kopyala",
+    "copied": "Kopyalandı ✓",
+    "orViaSocial": "Veya sosyal medyada",
+    "generating": "Kod oluşturuluyor..."
+  },
+  "notifications": {
+    "close": "Bildirimi kapat",
+    "titles": {
+      "error": "Hata",
+      "success": "Başarılı",
+      "info": "Bilgi",
+      "warning": "Uyarı"
+    }
+  },
+  "app": {
+    "update": {
+      "title": "Güncelleme",
+      "message": "Yeni sürüm bulundu. Uygulama yenileniyor..."
+    }
   }
 }

@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { TranslocoService } from '@jsverse/transloco';
 import { BehaviorSubject } from 'rxjs';
 
 export type ToastType = 'success' | 'error' | 'info' | 'warning';
@@ -13,6 +14,7 @@ export interface ToastMessage {
 
 @Injectable({ providedIn: 'root' })
 export class NotificaitonService {
+    private transloco = inject(TranslocoService);
     private timeoutId: ReturnType<typeof setTimeout> | null = null;
 
     private toastSubject = new BehaviorSubject<ToastMessage | null>(null);
@@ -36,7 +38,7 @@ export class NotificaitonService {
         }, payload.duration);
     }
 
-    showError(message: string, title = 'Hata') {
+    showError(message: string, title = this.transloco.translate('notifications.titles.error')) {
         this.show({
             type: 'error',
             title,
@@ -45,7 +47,7 @@ export class NotificaitonService {
         });
     }
 
-    showSuccess(message: string, title = 'Basarili') {
+    showSuccess(message: string, title = this.transloco.translate('notifications.titles.success')) {
         this.show({
             type: 'success',
             title,
@@ -54,7 +56,7 @@ export class NotificaitonService {
         });
     }
 
-    showInfo(message: string, title = 'Bilgi') {
+    showInfo(message: string, title = this.transloco.translate('notifications.titles.info')) {
         this.show({
             type: 'info',
             title,
@@ -63,7 +65,7 @@ export class NotificaitonService {
         });
     }
 
-    showWarning(message: string, title = 'Uyari') {
+    showWarning(message: string, title = this.transloco.translate('notifications.titles.warning')) {
         this.show({
             type: 'warning',
             title,

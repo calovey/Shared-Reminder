@@ -66,5 +66,49 @@
         "passwordTooWeak": "Password is too weak."
       }
     }
+  },
+  "header": {
+    "title": "Shared Workspace",
+    "menu": "Menu",
+    "toggleTheme": "Toggle theme",
+    "share": "Share",
+    "logout": "Log Out"
+  },
+  "sidebar": {
+    "newList": "New List",
+    "lists": {
+      "unforgettable": "Unforgettable",
+      "shopping": "Shopping",
+      "todos": "Todos"
+    }
+  },
+  "reminders": {
+    "newReminder": "New Reminder",
+    "placeholder": "Type your reminder here...",
+    "add": "Add Reminder",
+    "delete": "Delete"
+  },
+  "shareCode": {
+    "description": "Share this private code to invite someone into your workspace. Only people with this code can access your shared reminders.",
+    "close": "Close",
+    "copy": "Copy Code",
+    "copied": "Copied ✓",
+    "orViaSocial": "Or via social",
+    "generating": "Generating code..."
+  },
+  "notifications": {
+    "close": "Close notification",
+    "titles": {
+      "error": "Error",
+      "success": "Success",
+      "info": "Info",
+      "warning": "Warning"
+    }
+  },
+  "app": {
+    "update": {
+      "title": "Update",
+      "message": "A new version is available. Reloading the app..."
+    }
   }
 }

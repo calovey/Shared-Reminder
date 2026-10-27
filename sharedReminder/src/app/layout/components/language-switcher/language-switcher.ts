@@ -25,9 +25,9 @@ export class LanguageSwitcherComponent {
   currentLang = this.translocoService.getActiveLang();
   isOpen = false;
   readonly languages: LanguageOption[] = [
-    { code: 'tr', label: 'Turkce', shortLabel: 'TR', icon: 'assets/language/tr-flag.svg' },
+    { code: 'tr', label: 'Türkçe', shortLabel: 'TR', icon: 'assets/language/tr-flag.svg' },
     { code: 'en', label: 'English', shortLabel: 'EN', icon: 'assets/language/uk-flag.svg' },
-    { code: 'es', label: 'Espanol', shortLabel: 'ES', icon: 'assets/language/es-flag.svg' },
+    { code: 'es', label: 'Español', shortLabel: 'ES', icon: 'assets/language/es-flag.svg' },
     { code: 'de', label: 'Deutsch', shortLabel: 'DE', icon: 'assets/language/de-flag.svg' },
   ];
 

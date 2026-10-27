@@ -1,11 +1,12 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { TranslocoModule } from '@jsverse/transloco';
 import { NotificaitonService } from '../../../core/services/notificationService';
 
 @Component({
   selector: 'app-toast',
   standalone: true,
-  imports: [CommonModule, AsyncPipe],
+  imports: [CommonModule, AsyncPipe, TranslocoModule],
   templateUrl: './toast.html',
   styleUrl: './toast.scss',
 })

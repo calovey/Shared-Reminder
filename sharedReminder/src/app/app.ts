@@ -3,6 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
 import { filter, first } from 'rxjs';
 import { RouterOutlet } from '@angular/router';
+import { TranslocoService } from '@jsverse/transloco';
 import { ToastComponent } from './layout/components/toast/toast';
 import { NotificaitonService } from './core/services/notificationService';
 
@@ -17,6 +18,7 @@ export class App {
   private readonly destroyRef = inject(DestroyRef);
   private readonly swUpdate = inject(SwUpdate);
   private readonly notification = inject(NotificaitonService);
+  private readonly transloco = inject(TranslocoService);
 
   constructor() {
     if (!this.swUpdate.isEnabled) {
@@ -29,7 +31,10 @@ export class App {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(() => {
-        this.notification.showInfo('Yeni surum bulundu. Uygulama yenileniyor...', 'Guncelleme');
+        this.notification.showInfo(
+          this.transloco.translate('app.update.message'),
+          this.transloco.translate('app.update.title')
+        );
         void this.activateUpdate();
       });
 

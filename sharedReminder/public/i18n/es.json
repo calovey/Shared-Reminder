@@ -2,55 +2,55 @@
   "auth": {
     "fields": {
       "fullName": "Nombre completo",
-      "email": "Correo electronico",
-      "password": "Contrasena",
-      "confirmPassword": "Confirmar contrasena"
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "confirmPassword": "Confirmar contraseña"
     },
     "placeholders": {
-      "fullName": "Juan Perez",
+      "fullName": "Juan Pérez",
       "email": "name@mail.com",
       "password": "********"
     },
     "common": {
       "or": "O",
       "errors": {
-        "tooManyRequests": "Se hicieron demasiados intentos. Intentalo de nuevo mas tarde."
+        "tooManyRequests": "Se hicieron demasiados intentos. Inténtalo de nuevo más tarde."
       }
     },
     "notifications": {
       "missingField": "Campo faltante",
-      "invalidInput": "Entrada invalida",
-      "weakPassword": "Contrasena debil"
+      "invalidInput": "Entrada inválida",
+      "weakPassword": "Contraseña débil"
     },
     "login": {
       "title": "Bienvenido",
-      "subtitle": "Inicia sesion en tu cuenta para continuar.",
+      "subtitle": "Inicia sesión en tu cuenta para continuar.",
       "rememberMe": "Recordarme",
-      "forgotPassword": "Olvidaste tu contrasena?",
-      "submit": "Iniciar sesion",
-      "submitting": "Iniciando sesion...",
-      "noAccount": "No tienes una cuenta?",
-      "signUp": "Registrate",
-      "errorTitle": "Error de inicio de sesion",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "submit": "Iniciar sesión",
+      "submitting": "Iniciando sesión...",
+      "noAccount": "¿No tienes una cuenta?",
+      "signUp": "Regístrate",
+      "errorTitle": "Error de inicio de sesión",
       "success": {
-        "title": "Inicio de sesion exitoso",
+        "title": "Inicio de sesión exitoso",
         "message": "Bienvenido de nuevo."
       },
       "errors": {
-        "requiredFields": "El correo electronico y la contrasena son obligatorios.",
-        "failed": "No se pudo iniciar sesion.",
-        "invalidCredential": "Correo electronico o contrasena invalidos.",
-        "userNotFound": "No se encontro un usuario con este correo electronico.",
-        "wrongPassword": "La contrasena es incorrecta.",
-        "invalidEmail": "Correo electronico invalido."
+        "requiredFields": "El correo electrónico y la contraseña son obligatorios.",
+        "failed": "No se pudo iniciar sesión.",
+        "invalidCredential": "Correo electrónico o contraseña inválidos.",
+        "userNotFound": "No se encontró un usuario con este correo electrónico.",
+        "wrongPassword": "La contraseña es incorrecta.",
+        "invalidEmail": "Correo electrónico inválido."
       }
     },
     "register": {
       "title": "Crea tu cuenta",
-      "subtitle": "Crea tu cuenta rapidamente dentro del mismo diseno.",
+      "subtitle": "Crea tu cuenta rápidamente dentro del mismo diseño.",
       "submit": "Completar registro",
       "submitting": "Creando cuenta...",
-      "haveAccount": "Ya tienes una cuenta?",
+      "haveAccount": "¿Ya tienes una cuenta?",
       "errorTitle": "Registro fallido",
       "success": {
         "title": "Registro exitoso",
@@ -58,13 +58,57 @@
       },
       "errors": {
         "requiredFields": "Por favor completa todos los campos.",
-        "passwordMismatch": "Las contrasenas no coinciden.",
-        "weakPassword": "La contrasena debe tener al menos 6 caracteres.",
+        "passwordMismatch": "Las contraseñas no coinciden.",
+        "weakPassword": "La contraseña debe tener al menos 6 caracteres.",
         "failed": "No se pudo crear la cuenta.",
-        "emailInUse": "Este correo electronico ya esta en uso.",
-        "invalidEmail": "Correo electronico invalido.",
-        "passwordTooWeak": "La contrasena es demasiado debil."
+        "emailInUse": "Este correo electrónico ya está en uso.",
+        "invalidEmail": "Correo electrónico inválido.",
+        "passwordTooWeak": "La contraseña es demasiado débil."
       }
+    }
+  },
+  "header": {
+    "title": "Espacio compartido",
+    "menu": "Menú",
+    "toggleTheme": "Cambiar tema",
+    "share": "Compartir",
+    "logout": "Cerrar sesión"
+  },
+  "sidebar": {
+    "newList": "Nueva lista",
+    "lists": {
+      "unforgettable": "Inolvidables",
+      "shopping": "Compras",
+      "todos": "Tareas"
+    }
+  },
+  "reminders": {
+    "newReminder": "Nuevo recordatorio",
+    "placeholder": "Escribe tu recordatorio aquí...",
+    "add": "Añadir recordatorio",
+    "delete": "Eliminar"
+  },
+  "shareCode": {
+    "description": "Comparte este código privado para invitar a alguien a tu espacio de trabajo. Solo las personas con este código pueden acceder a tus recordatorios compartidos.",
+    "close": "Cerrar",
+    "copy": "Copiar código",
+    "copied": "Copiado ✓",
+    "orViaSocial": "O por redes sociales",
+    "generating": "Generando código..."
+  },
+  "notifications": {
+    "close": "Cerrar notificación",
+    "titles": {
+      "error": "Error",
+      "success": "Éxito",
+      "info": "Información",
+      "warning": "Advertencia"
+    }
+  },
+  "app": {
+    "update": {
+      "title": "Actualización",
+      "message": "Hay una nueva versión disponible. Recargando la aplicación..."
     }
   }
 }

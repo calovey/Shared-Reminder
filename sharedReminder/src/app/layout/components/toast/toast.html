@@ -32,7 +32,7 @@
 
       <button type="button"
         class="rounded-xl p-2 opacity-70 transition hover:bg-black/5 hover:opacity-100 dark:hover:bg-white/10"
-        (click)="close()" aria-label="Close notification">
+        (click)="close()" [attr.aria-label]="'notifications.close' | transloco">
         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 18 6M6 6l12 12" />
         </svg>
