@@ -5,7 +5,7 @@ import { filter, first } from 'rxjs';
 import { RouterOutlet } from '@angular/router';
 import { TranslocoService } from '@jsverse/transloco';
 import { ToastComponent } from './layout/components/toast/toast';
-import { NotificaitonService } from './core/services/notificationService';
+import { NotificationService } from './core/services/notificationService';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class App {
   private readonly appRef = inject(ApplicationRef);
   private readonly destroyRef = inject(DestroyRef);
   private readonly swUpdate = inject(SwUpdate);
-  private readonly notification = inject(NotificaitonService);
+  private readonly notification = inject(NotificationService);
   private readonly transloco = inject(TranslocoService);
 
   constructor() {

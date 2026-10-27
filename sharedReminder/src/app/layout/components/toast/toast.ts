@@ -1,7 +1,7 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
-import { NotificaitonService } from '../../../core/services/notificationService';
+import { NotificationService } from '../../../core/services/notificationService';
 
 @Component({
   selector: 'app-toast',
@@ -11,7 +11,7 @@ import { NotificaitonService } from '../../../core/services/notificationService'
   styleUrl: './toast.scss',
 })
 export class ToastComponent {
-  protected notificationService = inject(NotificaitonService);
+  protected notificationService = inject(NotificationService);
     private transloco = inject(TranslocoService);
   
 

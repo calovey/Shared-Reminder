@@ -4,7 +4,7 @@ import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
-import { NotificaitonService } from '../../core/services/notificationService';
+import { NotificationService } from '../../core/services/notificationService';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ import { NotificaitonService } from '../../core/services/notificationService';
   styleUrl: './login.scss',
 })
 export class LoginComponent {
-  private notification = inject(NotificaitonService);
+  private notification = inject(NotificationService);
   private auth = inject(Auth);
   private transloco = inject(TranslocoService);
 
