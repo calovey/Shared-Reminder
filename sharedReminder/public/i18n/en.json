@@ -4,7 +4,9 @@
       "fullName": "Full Name",
       "email": "Email",
       "password": "Password",
-      "confirmPassword": "Confirm Password"
+      "confirmPassword": "Confirm Password",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password"
     },
     "placeholders": {
       "fullName": "John Doe",

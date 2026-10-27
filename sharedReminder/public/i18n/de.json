@@ -4,7 +4,9 @@
       "fullName": "Vollständiger Name",
       "email": "E-Mail",
       "password": "Passwort",
-      "confirmPassword": "Passwort bestätigen"
+      "confirmPassword": "Passwort bestätigen",
+      "showPassword": "Passwort anzeigen",
+      "hidePassword": "Passwort verbergen"
     },
     "placeholders": {
       "fullName": "Max Mustermann",

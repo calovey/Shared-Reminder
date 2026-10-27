@@ -4,7 +4,9 @@
       "fullName": "Nombre completo",
       "email": "Correo electrónico",
       "password": "Contraseña",
-      "confirmPassword": "Confirmar contraseña"
+      "confirmPassword": "Confirmar contraseña",
+      "showPassword": "Mostrar contraseña",
+      "hidePassword": "Ocultar contraseña"
     },
     "placeholders": {
       "fullName": "Juan Pérez",

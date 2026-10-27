@@ -21,6 +21,7 @@ export class LoginComponent {
   email = '';
   password = '';
   rememberMe = false;
+  showPassword = false;
   loading = false;
   errorMessage = '';
 
