@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
-import { NotificaitonService } from '../../core/services/notificationService';
+import { NotificationService } from '../../core/services/notificationService';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +16,7 @@ import { NotificaitonService } from '../../core/services/notificationService';
   styleUrl: './register.scss',
 })
 export class RegisterComponent {
-  private notification = inject(NotificaitonService);
+  private notification = inject(NotificationService);
   private auth = inject(Auth);
   private firestore = inject(Firestore);
   private transloco = inject(TranslocoService);
@@ -25,6 +25,8 @@ export class RegisterComponent {
   email = '';
   password = '';
   confirmPassword = '';
+  showPassword = false;
+  showConfirmPassword = false;
   loading = false;
   errorMessage = '';
 

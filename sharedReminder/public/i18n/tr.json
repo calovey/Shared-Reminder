@@ -4,7 +4,9 @@
       "fullName": "Ad Soyad",
       "email": "E-posta",
       "password": "Şifre",
-      "confirmPassword": "Şifre Tekrarı"
+      "confirmPassword": "Şifre Tekrarı",
+      "showPassword": "Şifreyi göster",
+      "hidePassword": "Şifreyi gizle"
     },
     "placeholders": {
       "fullName": "Ad Soyad",
@@ -64,6 +66,25 @@
         "emailInUse": "Bu e-posta adresi zaten kullanımda.",
         "invalidEmail": "Geçersiz e-posta adresi.",
         "passwordTooWeak": "Şifre çok zayıf."
+      }
+    },
+    "forgotPassword": {
+      "title": "Şifremi Unuttum",
+      "subtitle": "E-posta adresini gir, şifreni sıfırlaman için bir bağlantı gönderelim.",
+      "submit": "Sıfırlama Bağlantısı Gönder",
+      "submitting": "Gönderiliyor...",
+      "backToLogin": "Girişe Dön",
+      "tryAgain": "Farklı bir e-posta kullan",
+      "remembered": "Şifreni hatırladın mı?",
+      "errorTitle": "İstek Başarısız",
+      "success": {
+        "title": "E-postanı Kontrol Et",
+        "message": "{{email}} adresine kayıtlı bir hesap varsa şifre sıfırlama bağlantısı gönderdik.",
+        "hint": "Gelmedi mi? Spam klasörüne bak ya da birkaç dakika sonra tekrar dene."
+      },
+      "errors": {
+        "requiredEmail": "Lütfen e-posta adresini gir.",
+        "failed": "Sıfırlama bağlantısı gönderilemedi."
       }
     }
   },

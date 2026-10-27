@@ -13,7 +13,7 @@ export interface ToastMessage {
 }
 
 @Injectable({ providedIn: 'root' })
-export class NotificaitonService {
+export class NotificationService {
     private transloco = inject(TranslocoService);
     private timeoutId: ReturnType<typeof setTimeout> | null = null;
 
