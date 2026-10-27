@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   standalone: true,
   selector: 'app-sidebar',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslocoModule],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss',
 })
@@ -14,9 +15,9 @@ export class SidebarComponent {
   @Output() closeMenu = new EventEmitter<void>();
 
   lists = [
-    { id: 'unforgettable', name: 'Unforgettable', route: '/reminders/unforgettable' },
-    { id: 'shopping', name: 'Shopping', route: '/reminders/shopping' },
-    { id: 'todos', name: 'Todos', route: '/reminders/todos' }
+    { id: 'unforgettable', name: 'Unforgettable', route: '/app/reminders/unforgettable' },
+    { id: 'shopping', name: 'Shopping', route: '/app/reminders/shopping' },
+    { id: 'todos', name: 'Todos', route: '/app/reminders/todos' }
   ];
 
   activeList = 'unforgettable';

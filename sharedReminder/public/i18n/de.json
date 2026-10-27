@@ -1,0 +1,114 @@
+{
+  "auth": {
+    "fields": {
+      "fullName": "Vollständiger Name",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "confirmPassword": "Passwort bestätigen"
+    },
+    "placeholders": {
+      "fullName": "Max Mustermann",
+      "email": "name@mail.com",
+      "password": "********"
+    },
+    "common": {
+      "or": "ODER",
+      "errors": {
+        "tooManyRequests": "Es wurden zu viele Versuche unternommen. Bitte versuche es später erneut."
+      }
+    },
+    "notifications": {
+      "missingField": "Fehlendes Feld",
+      "invalidInput": "Ungültige Eingabe",
+      "weakPassword": "Schwaches Passwort"
+    },
+    "login": {
+      "title": "Willkommen",
+      "subtitle": "Melde dich an, um fortzufahren.",
+      "rememberMe": "Angemeldet bleiben",
+      "forgotPassword": "Passwort vergessen?",
+      "submit": "Anmelden",
+      "submitting": "Anmeldung läuft...",
+      "noAccount": "Noch kein Konto?",
+      "signUp": "Registrieren",
+      "errorTitle": "Anmeldung fehlgeschlagen",
+      "success": {
+        "title": "Anmeldung erfolgreich",
+        "message": "Willkommen zurück."
+      },
+      "errors": {
+        "requiredFields": "E-Mail und Passwort sind erforderlich.",
+        "failed": "Anmeldung konnte nicht durchgeführt werden.",
+        "invalidCredential": "Ungültige E-Mail-Adresse oder falsches Passwort.",
+        "userNotFound": "Kein Benutzer mit dieser E-Mail-Adresse gefunden.",
+        "wrongPassword": "Das Passwort ist falsch.",
+        "invalidEmail": "Ungültige E-Mail-Adresse."
+      }
+    },
+    "register": {
+      "title": "Erstelle dein Konto",
+      "subtitle": "Erstelle dein Konto schnell im gleichen Design.",
+      "submit": "Registrierung abschließen",
+      "submitting": "Konto wird erstellt...",
+      "haveAccount": "Hast du bereits ein Konto?",
+      "errorTitle": "Registrierung fehlgeschlagen",
+      "success": {
+        "title": "Registrierung erfolgreich",
+        "message": "Dein Konto wurde erstellt."
+      },
+      "errors": {
+        "requiredFields": "Bitte fülle alle Felder aus.",
+        "passwordMismatch": "Die Passwörter stimmen nicht überein.",
+        "weakPassword": "Das Passwort muss mindestens 6 Zeichen lang sein.",
+        "failed": "Konto konnte nicht erstellt werden.",
+        "emailInUse": "Diese E-Mail-Adresse wird bereits verwendet.",
+        "invalidEmail": "Ungültige E-Mail-Adresse.",
+        "passwordTooWeak": "Das Passwort ist zu schwach."
+      }
+    }
+  },
+  "header": {
+    "title": "Gemeinsamer Arbeitsbereich",
+    "menu": "Menü",
+    "toggleTheme": "Design wechseln",
+    "share": "Teilen",
+    "logout": "Abmelden"
+  },
+  "sidebar": {
+    "newList": "Neue Liste",
+    "lists": {
+      "unforgettable": "Unvergesslich",
+      "shopping": "Einkaufen",
+      "todos": "Aufgaben"
+    }
+  },
+  "reminders": {
+    "newReminder": "Neue Erinnerung",
+    "placeholder": "Gib hier deine Erinnerung ein...",
+    "add": "Erinnerung hinzufügen",
+    "delete": "Löschen"
+  },
+  "shareCode": {
+    "description": "Teile diesen privaten Code, um jemanden in deinen Arbeitsbereich einzuladen. Nur Personen mit diesem Code können auf eure geteilten Erinnerungen zugreifen.",
+    "close": "Schließen",
+    "copy": "Code kopieren",
+    "copied": "Kopiert ✓",
+    "orViaSocial": "Oder über soziale Medien",
+    "generating": "Code wird erstellt..."
+  },
+  "notifications": {
+    "close": "Benachrichtigung schließen",
+    "titles": {
+      "error": "Fehler",
+      "success": "Erfolgreich",
+      "info": "Info",
+      "warning": "Warnung"
+    }
+  },
+  "app": {
+    "update": {
+      "title": "Update",
+      "message": "Eine neue Version ist verfügbar. Die App wird neu geladen..."
+    }
+  }
+}

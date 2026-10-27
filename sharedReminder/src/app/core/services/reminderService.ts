@@ -1,25 +1,28 @@
-import { inject, Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, addDoc, doc, updateDoc, deleteDoc, serverTimestamp, query, orderBy } from '@angular/fire/firestore';
+import { Injectable } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
+import { Firestore, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Reminder } from '../models/reminderModel';
-import { Auth } from '@angular/fire/auth';
+import {
+    addDoc,
+    collection,
+    deleteDoc,
+    doc,
+    orderBy,
+    query,
+    serverTimestamp,
+    updateDoc
+} from 'firebase/firestore';
 
 @Injectable({ providedIn: 'root' })
-
 export class ReminderService {
     constructor(
-        private _firestoreService: Firestore,
-        private _authService: Auth
+        private _firestore: Firestore,
+        private _auth: Auth
     ) { }
 
-    private firestore = inject(Firestore);
-    private auth = inject(Auth);
-
     private getCollection(workspaceCode: string) {
-        return collection(
-            this.firestore,
-            `workspaces/${workspaceCode}/reminders`
-        );
+        return collection(this._firestore, `workspaces/${workspaceCode}/reminders`);
     }
 
     getReminders(workspaceCode: string): Observable<Reminder[]> {
@@ -30,9 +33,7 @@ export class ReminderService {
     }
 
     async addReminder(workspaceCode: string, text: string) {
-        const user = this.auth.currentUser;
-        if (!user) throw new Error('User not authenticated');
-
+        const user = await this.requireAuth();
         const remindersRef = this.getCollection(workspaceCode);
 
         await addDoc(remindersRef, {
@@ -46,12 +47,36 @@ export class ReminderService {
     async toggleComplete(workspaceCode: string, reminder: Reminder) {
         if (!reminder.id) return;
 
-        const reminderDoc = doc(this.firestore, `workspaces/${workspaceCode}/reminders/${reminder.id}`);
+        await this.requireAuth();
+
+        const reminderDoc = doc(
+            this._firestore,
+            `workspaces/${workspaceCode}/reminders/${reminder.id}`
+        );
+
         await updateDoc(reminderDoc, { completed: !reminder.completed });
     }
 
     async deleteReminder(workspaceCode: string, reminderId: string) {
-        const reminderDoc = doc(this.firestore, `workspaces/${workspaceCode}/reminders/${reminderId}`);
+        await this.requireAuth();
+
+        const reminderDoc = doc(
+            this._firestore,
+            `workspaces/${workspaceCode}/reminders/${reminderId}`
+        );
+
         await deleteDoc(reminderDoc);
+    }
+
+    private async requireAuth() {
+        await this._auth.authStateReady();
+
+        const user = this._auth.currentUser;
+        if (!user) {
+            throw new Error('User not authenticated');
+        }
+
+        await user.getIdToken();
+        return user;
     }
 }

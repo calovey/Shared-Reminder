@@ -1,27 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
+import { Subscription } from 'rxjs';
 import { Reminder } from '../../core/models/reminderModel';
-import { Observable } from 'rxjs';
 import { ReminderService } from '../../core/services/reminderService';
 import { WorkspaceService } from '../../core/services/workspaceService';
 
 @Component({
   standalone: true,
   selector: 'app-reminder-list',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslocoModule],
   templateUrl: './reminder-list.html',
   styleUrl: './reminder-list.scss',
 })
-
-export class ReminderListComponent implements OnInit {
-
+export class ReminderListComponent implements OnInit, OnDestroy {
   workspaceCode = '';
   reminders: Reminder[] = [];
   newReminder = '';
 
-  constructor(private _route: ActivatedRoute,
+  private remindersSubscription?: Subscription;
+
+  constructor(
     private _reminderService: ReminderService,
     private _workspaceService: WorkspaceService,
     private _cdr: ChangeDetectorRef,
@@ -29,9 +29,18 @@ export class ReminderListComponent implements OnInit {
 
   async ngOnInit() {
     this.workspaceCode = await this._workspaceService.getOrCreateWorkspace();
+    this.loadReminders();
+  }
 
-    this._reminderService.getReminders(this.workspaceCode).subscribe((items) => {
+  ngOnDestroy() {
+    this.remindersSubscription?.unsubscribe();
+  }
+
+  loadReminders() {
+    this.remindersSubscription?.unsubscribe();
+    this.remindersSubscription = this._reminderService.getReminders(this.workspaceCode).subscribe((items) => {
       this.reminders = items;
+      this._cdr.detectChanges();
     });
   }
 
@@ -45,12 +54,19 @@ export class ReminderListComponent implements OnInit {
 
   async toggleComplete(reminder: Reminder) {
     await this._reminderService.toggleComplete(this.workspaceCode, reminder);
+    reminder.completed = !reminder.completed;
     this._cdr.detectChanges();
   }
 
   async deleteReminder(reminder: Reminder) {
     if (!reminder.id) return;
-    await this._reminderService.deleteReminder(this.workspaceCode, reminder.id);
-    this._cdr.detectChanges();
+
+    try {
+      await this._reminderService.deleteReminder(this.workspaceCode, reminder.id);
+      this.reminders = this.reminders.filter(r => r.id !== reminder.id);
+      this._cdr.detectChanges();
+    } catch (error) {
+      console.error('error', error);
+    }
   }
 }

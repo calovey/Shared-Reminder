@@ -1,0 +1,51 @@
+<div class="text-center mb-8">
+    <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-2">{{ 'auth.register.title' | transloco }}</h2>
+    <p class="text-sm text-gray-600 dark:text-gray-400">{{ 'auth.register.subtitle' | transloco }}</p>
+</div>
+
+<form class="space-y-4" (ngSubmit)="register()">
+    <div *ngIf="errorMessage" class="mb-4 text-sm text-red-500 text-center">
+        {{ errorMessage }}
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ 'auth.fields.fullName' | transloco }}</label>
+        <input type="text" [(ngModel)]="fullName" name="fullName" required
+            class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all dark:text-white"
+            [placeholder]="'auth.placeholders.fullName' | transloco">
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ 'auth.fields.email' | transloco }}</label>
+        <input type="email" [(ngModel)]="email" name="email" required
+            class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all dark:text-white"
+            [placeholder]="'auth.placeholders.email' | transloco">
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ 'auth.fields.password' | transloco }}</label>
+            <input type="password" [(ngModel)]="password" name="password" required
+                class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all dark:text-white"
+                [placeholder]="'auth.placeholders.password' | transloco">
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ 'auth.fields.confirmPassword' | transloco }}</label>
+            <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required
+                class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all dark:text-white"
+                [placeholder]="'auth.placeholders.password' | transloco">
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="loading"
+        class="w-full py-3 px-4 mt-4 bg-gradient-to-r from-indigo-600 to-fuchsia-600 hover:from-indigo-700 hover:to-fuchsia-700 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/30 transition-all active:scale-95 disabled:opacity-50">
+        <span *ngIf="!loading">{{ 'auth.register.submit' | transloco }}</span>
+        <span *ngIf="loading">{{ 'auth.register.submitting' | transloco }}</span>
+    </button>
+</form>
+
+<p class="mt-8 text-center text-sm text-gray-500">
+    {{ 'auth.register.haveAccount' | transloco }}
+    <a routerLink="/login" class="text-indigo-500 dark:text-indigo-400 font-semibold hover:underline">{{ 'auth.login.submit' | transloco }}</a>
+</p>

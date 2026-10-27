@@ -1,48 +1,42 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { Firestore, doc, getDoc, setDoc, serverTimestamp, updateDoc, arrayUnion } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
+import { Firestore } from '@angular/fire/firestore';
+import {
+    arrayUnion,
+    doc,
+    getDoc,
+    serverTimestamp,
+    setDoc,
+    updateDoc
+} from 'firebase/firestore';
+
+interface UserProfileDoc {
+    activeWorkspaceCode?: string | null;
+}
 
 @Injectable({ providedIn: 'root' })
 export class WorkspaceService {
-    private storageKey = 'activeWorkspaceCode';
-
-    constructor(private _firestore: Firestore,
-        private _router: Router,
+    constructor(
+        private _firestore: Firestore,
         private _auth: Auth
     ) { }
 
-
-    //#region Helper Methods
-    // if LocalStorage doesnt exist create
     async getOrCreateWorkspace(): Promise<string> {
-        const local = this.getLocalWorkspaceCode();
-        if (local) return local;
+        const user = await this.waitForAuth();
+        const storedCode = await this.getStoredWorkspaceCode(user.uid);
+
+        if (storedCode && await this.workspaceExists(storedCode)) {
+            return storedCode;
+        }
 
         return await this.createWorkspace();
     }
 
-    getLocalWorkspaceCode(): string | null {
-        return localStorage.getItem(this.storageKey);
+    async clearActiveWorkspace() {
+        const user = await this.waitForAuth();
+        await this.saveActiveWorkspaceCode(user.uid, null);
     }
 
-    setLocalWorkspaceCode(code: string) {
-        localStorage.setItem(this.storageKey, code);
-    }
-
-    clearLocalWorkspace() {
-        localStorage.removeItem(this.storageKey);
-    }
-
-    getActiveCode(): string | null {
-        return localStorage.getItem(this.storageKey);
-    }
-
-    setActiveCode(code: string) {
-        localStorage.setItem(this.storageKey, code);
-    }
-
-    // Generate Code
     generateWorkspaceCode(length: number = 6): string {
         const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
         let result = '';
@@ -52,9 +46,9 @@ export class WorkspaceService {
         for (let i = 0; i < length; i++) {
             result += chars[array[i] % chars.length];
         }
+
         return result;
     }
-    //#endregion
 
     async workspaceExists(code: string): Promise<boolean> {
         const ref = doc(this._firestore, `workspaces/${code}`);
@@ -63,14 +57,17 @@ export class WorkspaceService {
     }
 
     async createWorkspace(): Promise<string> {
+        const user = await this.waitForAuth();
+        const uid = user.uid;
 
-        const uid = await this.waitForAuth();
+        await this.ensureUserProfile(user.uid, user.email, user.displayName);
+        await user.getIdToken();
 
         for (let i = 0; i < 5; i++) {
             const code = this.generateWorkspaceCode(6);
             const ref = doc(this._firestore, `workspaces/${code}`);
-
             const snap = await getDoc(ref);
+
             if (snap.exists()) continue;
 
             await setDoc(ref, {
@@ -79,7 +76,7 @@ export class WorkspaceService {
                 members: [uid]
             });
 
-            this.setLocalWorkspaceCode(code);
+            await this.saveActiveWorkspaceCode(uid, code);
             return code;
         }
 
@@ -89,36 +86,59 @@ export class WorkspaceService {
     async joinWorkspace(code: string): Promise<void> {
         const cleaned = code.trim().toUpperCase();
         const ref = doc(this._firestore, `workspaces/${cleaned}`);
-
         const snap = await getDoc(ref);
+
         if (!snap.exists()) {
             throw new Error('Workspace not found.');
         }
 
-        const uid = this._auth.currentUser?.uid ?? null;
+        const user = await this.waitForAuth();
 
-        if (uid) {
-            await updateDoc(ref, {
-                members: arrayUnion(uid)
-            });
-        }
+        await updateDoc(ref, {
+            members: arrayUnion(user.uid)
+        });
 
-        this.setLocalWorkspaceCode(cleaned);
+        await this.saveActiveWorkspaceCode(user.uid, cleaned);
     }
 
-    private async waitForAuth(): Promise<string> {
-        return new Promise((resolve, reject) => {
-            const unsubscribe = this._auth.onAuthStateChanged((user) => {
-                if (user) {
-                    unsubscribe();
-                    resolve(user.uid);
-                }
-            });
+    private async getStoredWorkspaceCode(uid: string): Promise<string | null> {
+        const userRef = this.getUserDocRef(uid);
+        const snap = await getDoc(userRef);
 
-            setTimeout(() => {
-                unsubscribe();
-                reject(new Error('Auth timeout'));
-            }, 5000);
-        });
+        if (!snap.exists()) {
+            return null;
+        }
+
+        const data = snap.data() as UserProfileDoc;
+        return data.activeWorkspaceCode ?? null;
+    }
+
+    private async saveActiveWorkspaceCode(uid: string, code: string | null) {
+        await setDoc(this.getUserDocRef(uid), {
+            activeWorkspaceCode: code
+        }, { merge: true });
+    }
+
+    private async ensureUserProfile(uid: string, email: string | null, displayName: string | null) {
+        await setDoc(this.getUserDocRef(uid), {
+            email,
+            displayName,
+            createdAt: serverTimestamp()
+        }, { merge: true });
+    }
+
+    private getUserDocRef(uid: string) {
+        return doc(this._firestore, `users/${uid}`);
+    }
+
+    private async waitForAuth() {
+        await this._auth.authStateReady();
+
+        const user = this._auth.currentUser;
+        if (!user) {
+            throw new Error('User not authenticated');
+        }
+
+        return user;
     }
 }
