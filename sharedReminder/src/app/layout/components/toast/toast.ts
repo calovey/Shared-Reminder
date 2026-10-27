@@ -1,6 +1,6 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { NotificaitonService } from '../../../core/services/notificationService';
 
 @Component({
@@ -12,6 +12,8 @@ import { NotificaitonService } from '../../../core/services/notificationService'
 })
 export class ToastComponent {
   protected notificationService = inject(NotificaitonService);
+    private transloco = inject(TranslocoService);
+  
 
   close() {
     this.notificationService.clear();
