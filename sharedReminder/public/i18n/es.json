@@ -67,6 +67,25 @@
         "invalidEmail": "Correo electrónico inválido.",
         "passwordTooWeak": "La contraseña es demasiado débil."
       }
+    },
+    "forgotPassword": {
+      "title": "Olvidé mi contraseña",
+      "subtitle": "Introduce tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.",
+      "submit": "Enviar enlace",
+      "submitting": "Enviando...",
+      "backToLogin": "Volver a iniciar sesión",
+      "tryAgain": "Usar otro correo",
+      "remembered": "¿Recordaste tu contraseña?",
+      "errorTitle": "Solicitud fallida",
+      "success": {
+        "title": "Revisa tu correo",
+        "message": "Si existe una cuenta para {{email}}, te hemos enviado un enlace para restablecer la contraseña.",
+        "hint": "¿No lo recibiste? Revisa la carpeta de spam o inténtalo de nuevo en unos minutos."
+      },
+      "errors": {
+        "requiredEmail": "Por favor, introduce tu correo electrónico.",
+        "failed": "No se pudo enviar el enlace."
+      }
     }
   },
   "header": {

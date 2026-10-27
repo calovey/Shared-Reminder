@@ -67,6 +67,25 @@
         "invalidEmail": "Ungültige E-Mail-Adresse.",
         "passwordTooWeak": "Das Passwort ist zu schwach."
       }
+    },
+    "forgotPassword": {
+      "title": "Passwort vergessen",
+      "subtitle": "Gib deine E-Mail-Adresse ein und wir senden dir einen Link zum Zurücksetzen deines Passworts.",
+      "submit": "Link senden",
+      "submitting": "Wird gesendet...",
+      "backToLogin": "Zurück zur Anmeldung",
+      "tryAgain": "Andere E-Mail verwenden",
+      "remembered": "Passwort wieder eingefallen?",
+      "errorTitle": "Anfrage fehlgeschlagen",
+      "success": {
+        "title": "Prüfe dein Postfach",
+        "message": "Falls ein Konto für {{email}} existiert, haben wir einen Link zum Zurücksetzen gesendet.",
+        "hint": "Nichts angekommen? Sieh im Spam-Ordner nach oder versuche es in ein paar Minuten erneut."
+      },
+      "errors": {
+        "requiredEmail": "Bitte gib deine E-Mail-Adresse ein.",
+        "failed": "Der Link konnte nicht gesendet werden."
+      }
     }
   },
   "header": {

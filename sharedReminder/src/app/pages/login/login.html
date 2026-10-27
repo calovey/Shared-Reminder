@@ -36,7 +36,7 @@
                 class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 mr-2">
             {{ 'auth.login.rememberMe' | transloco }}
         </label>
-        <a href="#" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">{{ 'auth.login.forgotPassword' | transloco }}</a>
+        <a routerLink="/forgot-password" [queryParams]="email.trim() ? { email: email.trim() } : {}" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">{{ 'auth.login.forgotPassword' | transloco }}</a>
     </div>
 
     <button type="submit" [disabled]="loading"

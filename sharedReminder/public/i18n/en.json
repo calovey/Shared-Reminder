@@ -67,6 +67,25 @@
         "invalidEmail": "Invalid email address.",
         "passwordTooWeak": "Password is too weak."
       }
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "subtitle": "Enter your email address and we'll send you a link to reset your password.",
+      "submit": "Send Reset Link",
+      "submitting": "Sending...",
+      "backToLogin": "Back to Sign In",
+      "tryAgain": "Use a different email",
+      "remembered": "Remembered your password?",
+      "errorTitle": "Request Failed",
+      "success": {
+        "title": "Check Your Email",
+        "message": "If an account exists for {{email}}, we've sent a password reset link.",
+        "hint": "Didn't get it? Check your spam folder or try again in a few minutes."
+      },
+      "errors": {
+        "requiredEmail": "Please enter your email address.",
+        "failed": "The reset link could not be sent."
+      }
     }
   },
   "header": {
