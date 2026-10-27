@@ -1,12 +1,13 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslocoModule } from '@jsverse/transloco';
 import { WorkspaceService } from '../../core/services/workspaceService';
 
 @Component({
   standalone: true,
   selector: 'app-share-code-dialog',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslocoModule],
   templateUrl: './share-code.html',
   styleUrl: './share-code.scss',
 })

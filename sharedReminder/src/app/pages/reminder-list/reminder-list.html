@@ -27,12 +27,12 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span class="font-semibold">New Reminder</span>
+          <span class="font-semibold">{{ 'reminders.newReminder' | transloco }}</span>
         </div>
 
         <div class="relative">
           <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-red-300 to-red-400 rounded-full"></div>
-          <textarea [(ngModel)]="newReminder" placeholder="Type your reminder here..."
+          <textarea [(ngModel)]="newReminder" [placeholder]="'reminders.placeholder' | transloco"
             class="w-full pl-6 pr-4 py-2 bg-transparent resize-none focus:outline-none text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500"
             style="background-image: repeating-linear-gradient(transparent, transparent 31px, rgba(229, 231, 235, 0.1) 31px, rgba(229, 231, 235, 0.1) 32px); line-height: 32px; min-height: 96px;"
             rows="3">
@@ -45,7 +45,7 @@
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
           </svg>
-          Add Reminder
+          {{ 'reminders.add' | transloco }}
         </button>
       </div>
     </div>
@@ -72,7 +72,7 @@
           </div>
           <button (click)="deleteReminder(reminder)"
             class="flex-shrink-0 p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all duration-200 active:scale-90"
-            title="Sil">
+            [title]="'reminders.delete' | transloco">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />

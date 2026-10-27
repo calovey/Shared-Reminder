@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { Auth, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
 import { ThemeService } from '../../../../theme.service';
 import { ShareCodeDialog } from '../../../pages/share-code-dialog/share-code';
 import { LanguageSwitcherComponent } from '../language-switcher/language-switcher';
@@ -10,7 +11,7 @@ import { LanguageSwitcherComponent } from '../language-switcher/language-switche
 @Component({
   standalone: true,
   selector: 'app-header',
-  imports: [CommonModule, LanguageSwitcherComponent],
+  imports: [CommonModule, LanguageSwitcherComponent, TranslocoModule],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })

@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   standalone: true,
   selector: 'app-sidebar',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslocoModule],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss',
 })

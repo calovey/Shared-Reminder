@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslocoModule } from '@jsverse/transloco';
 import { Subscription } from 'rxjs';
 import { Reminder } from '../../core/models/reminderModel';
 import { ReminderService } from '../../core/services/reminderService';
@@ -9,7 +10,7 @@ import { WorkspaceService } from '../../core/services/workspaceService';
 @Component({
   standalone: true,
   selector: 'app-reminder-list',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslocoModule],
   templateUrl: './reminder-list.html',
   styleUrl: './reminder-list.scss',
 })
